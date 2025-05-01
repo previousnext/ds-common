@@ -1,0 +1,12 @@
+.common-card {
+  border: 2px dotted deepskyblue;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.common-card strong {
+  font-family: "Comic Sans MS", serif;
+  text-align: center;
+  font-size: 2em;
+  color: hotpink;
+}

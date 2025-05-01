@@ -1,0 +1,10 @@
+<div {{ containerAttributes.addClass('common-card') }}>
+  COMMON CARD
+  {{ image }}
+  {{ links }}
+  {% if date %}
+  <time
+    datetime="{{ date|date('Y-m-d\TH:i:sP') }}"
+  >{{ date|date('jS M Y') }}</time>
+  {% endif %}
+</div>

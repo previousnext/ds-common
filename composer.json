@@ -1,0 +1,16 @@
+{
+    "name": "previousnext/ds-common",
+    "type": "library",
+    "require": {
+        "php": ">=8.2",
+        "ramsey/collection": "^2.1.1",
+        "symfony/string": "^7.2",
+        "dpi/pinto": "^0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PreviousNext\\Ds\\Common\\": "."
+        }
+    },
+    "license": "proprietary"
+}

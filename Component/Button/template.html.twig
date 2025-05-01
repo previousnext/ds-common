@@ -1,0 +1,7 @@
+{% if as == constant('\\PreviousNext\\Ds\\Common\\Component\\Button\\ButtonType::Link') %}
+  <a href="{{ link.url }}" class="common-button common-button--link">{{ title }}</a>
+{% else %}
+  <button type="button" class="common-button common-button--button">
+    {{ title }}
+  </button>
+{% endif %}

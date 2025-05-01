@@ -1,0 +1,16 @@
+.common-callout {
+  background-color: #3057E1;
+}
+
+.common-callout--heading {
+  display: block;
+  padding: 1em;
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.common-callout--content {
+  border: 1px solid #CED8F7;
+  padding: 1em;
+  background-color: white;
+}

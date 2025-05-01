@@ -1,0 +1,17 @@
+.common-accordion-item {
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+}
+
+.common-accordion-item:hover {
+  background-color: #eee;
+}
+
+.common-accordion-item--title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.common-accordion-item--content {
+  line-height: 1.8em;
+}
