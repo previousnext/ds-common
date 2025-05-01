@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\List;
 
-use Drupal\pinto\List\StreamWrapperAssetTrait;
 use Pinto\Attribute\Definition;
 use Pinto\List\ObjectListTrait;
 use PreviousNext\Ds\Common\Component;
@@ -15,7 +14,6 @@ use PreviousNext\Ds\Common\Component;
 trait ListTrait {
 
   use ObjectListTrait;
-  use StreamWrapperAssetTrait;
 
   public function name(): string
   {
@@ -33,14 +31,22 @@ trait ListTrait {
     return 'template';
   }
 
-  public function absoluteCssDirectory(): string {
-    $dirOfThis = dirname((new \ReflectionClass(static::class))->getFileName());
-    return realpath(sprintf('%s/../%s/', $dirOfThis, $this->resolveSubDirectory()));
+  /**
+   * {@inheritdoc}
+   */
+  public function cssDirectory(): string {
+    // @todo fix Pinto to allow DRUPAL_ROOT relative paths like you could in
+    // 0.1.6.
+    return '/data/app/libraries/ids';
   }
 
-  public function absoluteJsDirectory(): string {
-    $dirOfThis = dirname((new \ReflectionClass(static::class))->getFileName());
-    return realpath(sprintf('%s/../%s/', $dirOfThis, $this->resolveSubDirectory()));
+  /**
+   * {@inheritdoc}
+   */
+  public function jsDirectory(): string {
+    // @todo fix Pinto to allow DRUPAL_ROOT relative paths like you could in
+    // 0.1.6.
+    return '/data/app/libraries/ids';
   }
 
   /**

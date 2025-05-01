@@ -4,11 +4,9 @@ declare(strict_types = 1);
 
 namespace PreviousNext\Ds\Common\Component\Button;
 
-use Pinto\Attribute\Asset;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
 
-#[Asset\Css('styles.css', preprocess: true)]
 class Button implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
