@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Media;
 
@@ -18,7 +18,7 @@ use PreviousNext\Ds\Common\Utility;
   'mediaType',
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
-class Media {
+class Media implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
@@ -49,4 +49,5 @@ class Media {
     return $build
       ->set('mediaType', (new \ReflectionClass($this->media))->getShortName());
   }
+
 }

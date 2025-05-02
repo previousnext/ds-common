@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\BundleClass\BlockContent\Card;
 
@@ -10,7 +10,6 @@ use Drupal\link\Plugin\Field\FieldType\LinkItem;
 use Drupal\media\MediaInterface;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\BundleClass\BlockContent;
-use PreviousNext\Ds\Common\Component;
 
 /**
  * @phpstan-require-implements \PreviousNext\Ds\Common\Component\Card\CardDataInterface
@@ -22,7 +21,7 @@ trait CardBundleTrait {
     $links = new Atom\Link\Links();
 
     foreach ($this->get(BlockContent\Card\Fields::CardLinks->getMachineName()) as $linkItem) {
-      assert($linkItem instanceof LinkItem);
+      \assert($linkItem instanceof LinkItem);
       $links[] = Atom\Link\LinkWithLabel::fromLabelAndUrl(
         $linkItem->title,
         Url::fromUri($linkItem->uri),
@@ -32,15 +31,16 @@ trait CardBundleTrait {
     return $links;
   }
 
-  final public function setLinks() {
+  final public function setLinks(): static {
     // @todo implement
+    return $this;
   }
 
   final public function getCardImage(): ?MediaInterface {
     return $this->get(BlockContent\Card\Fields::CardImage->getMachineName())->entity ?? NULL;
   }
 
-  final public function setCardImage(MediaInterface $image) {
+  final public function setCardImage(MediaInterface $image): static {
     return $this->set(BlockContent\Card\Fields::CardImage->getMachineName(), $image);
   }
 
@@ -50,7 +50,7 @@ trait CardBundleTrait {
     return $date !== NULL ? \DateTimeImmutable::createFromMutable($date->getPhpDateTime()) : NULL;
   }
 
-  final public function setCardDate(\DateTimeInterface $date) {
+  final public function setCardDate(\DateTimeInterface $date): static {
     return $this->set(
       BlockContent\Card\Fields::CardDate->getMachineName(),
       $date

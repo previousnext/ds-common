@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Layout\Section;
 
@@ -22,7 +22,7 @@ use PreviousNext\Ds\Common\Utility;
   'modifiers',
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
-class Section {
+class Section implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
@@ -52,7 +52,7 @@ class Section {
       as: $as,
       isContainer: $isContainer,
       background: $background,
-      heading: $heading ? Atom\Heading\Heading::create($heading) : NULL,
+      heading: $heading !== NULL ? Atom\Heading\Heading::create($heading) : NULL,
       content: $content,
       link: $link,
       modifiers: new Modifier\ModifierBag(SectionModifierInterface::class),
@@ -68,8 +68,7 @@ class Section {
       ->set('heading', $this->heading)
       ->set('content', $this->content->markup)
       ->set('link', $this->link instanceof Atom\Link\LinkWithLabel ? $this->link->markup() : $this->link->url)
-      ->set('modifiers', NULL)
-    ;
+      ->set('modifiers', NULL);
   }
 
 }

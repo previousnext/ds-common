@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\Icon;
-
-use PreviousNext\Ds\Common\Component;
 
 final class Icon {
 

@@ -1,17 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Layout\Grid\GridItem;
 
 use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
-use PreviousNext\Ds\Common\Component;
-use PreviousNext\Ds\Common\Layout\Grid\GridModifierInterface;
-use PreviousNext\Ds\Common\Utility;
-use PreviousNext\Ds\Common\Modifier;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
+use PreviousNext\Ds\Common\Modifier;
+use PreviousNext\Ds\Common\Utility;
 
 #[ObjectType\Slots(slots: [
   'item',
@@ -20,16 +18,16 @@ use PreviousNext\Ds\Common\Atom;
   'as',
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
-class GridItem {
+class GridItem implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
   /**
-   * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<GridModifierInterface> $modifiers
+   * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<\PreviousNext\Ds\Common\Layout\Grid\GridModifierInterface> $modifiers
    */
   final private function __construct(
     // Should this accept anything? auto-exec objs?
-//    protected Atom\Html\Html $item,
+    // protected Atom\Html\Html $item,.
     protected mixed $item,
     protected GridItemType $as,
     protected bool $isContainer,
@@ -38,10 +36,10 @@ class GridItem {
   ) {}
 
   /**
-   * @phpstan-param array<object|array<string, mixed>> $items
+   * @phpstan-param array<object|array<string, mixed>> $item
    */
   public static function create(
-//    Atom\Html\Html $item,
+    // Atom\Html\Html $item,.
     mixed $item,
     GridItemType $as,
     bool $isContainer = TRUE,
@@ -61,8 +59,7 @@ class GridItem {
       ->set('item', $this->item instanceof Atom\Html\Html ? $this->item->markup : $this->item)
       ->set('isContainer', $this->isContainer)
       ->set('as', $this->as)
-      ->set('modifiers', NULL)
-    ;
+      ->set('modifiers', NULL);
   }
 
 }

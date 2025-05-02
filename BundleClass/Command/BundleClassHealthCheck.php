@@ -64,7 +64,6 @@ final class BundleClassHealthCheck extends Command {
         continue;
       }
 
-
       $bundleInfo = $allBundleInfo[$entityTypeId][$bundle] ?? NULL;
       if ($bundleInfo !== NULL) {
         $bundleClasses[] = [$bundleClass, $metadata, $bundleClass, TRUE];
@@ -72,13 +71,15 @@ final class BundleClassHealthCheck extends Command {
       }
 
       if ($bundleClassMetadata->optional === FALSE && $bundleClassMetadata->ifNotMeThenA === NULL) {
-        throw new \LogicException(sprintf('#[BundleClassMetadata(ifNotMeThenA)] must be set if the optional=FALSE on `%s`', $bundleClass));
+        throw new \LogicException(\sprintf('#[BundleClassMetadata(ifNotMeThenA)] must be set if the optional=FALSE on `%s`', $bundleClass));
       }
 
-      // Then ensure a bundle with the interface is implemented... otherwise offer to create.
+      // Then ensure a bundle with the interface is implemented... otherwise
+      // offer to create.
       $otherBundlesImplementing = \iterator_to_array(EntityReferenceResolver::resolve($bundleClassMetadata->ifNotMeThenA));
       if ([] === $otherBundlesImplementing) {
-        // If no other bundles implement the bundle at `ifNotMeThenA` then offer to create a bundle implementing it.
+        // If no other bundles implement the bundle at `ifNotMeThenA` then offer
+        // to create a bundle implementing it.
         $taskCreateBundle[] = [$bundleClassMetadata->ifNotMeThenA, $bundleClass, $entityTypeId, $bundle];
       }
       else {
@@ -111,7 +112,8 @@ final class BundleClassHealthCheck extends Command {
           $ifNotMeThenA,
         );
 
-        // This may blow up with ID conflicts. In which case quit and ask the user to create one manually.
+        // This may blow up with ID conflicts. In which case quit and ask the
+        // user to create one manually.
         $requiredInterfaces = \implode(' or ', $ifNotMeThenA);
 
         $io->title('Bundle implementing interface not found');
@@ -126,8 +128,8 @@ final class BundleClassHealthCheck extends Command {
         );
         $shallCreate = $io
           ->confirm(
-            question: sprintf('Shall we create one for you? Otherwise you need to create a bundle implementing %s on your own before continuing.', $requiredInterfaces),
-            default: false,
+            question: \sprintf('Shall we create one for you? Otherwise you need to create a bundle implementing %s on your own before continuing.', $requiredInterfaces),
+            default: FALSE,
           );
 
         if ($shallCreate === FALSE) {
@@ -162,7 +164,7 @@ final class BundleClassHealthCheck extends Command {
         // @todo handle bundle classes extending the common one.
         if ($actualBundleClassName !== $bundleClass) {
           $reportRow[] = 'Unexpected class';
-          $io->error(sprintf('Found `%s` for bundle class, but expected `%s`', $actualBundleClassName, static::linkClass($bundleClass)));
+          $io->error(\sprintf('Found `%s` for bundle class, but expected `%s`', $actualBundleClassName, static::linkClass($bundleClass)));
         }
         else {
           $reportRow[] = '<fg=black;bg=green> OK </>';
@@ -183,7 +185,7 @@ final class BundleClassHealthCheck extends Command {
       $bundle = $metadata->bundle;
 
       if (FALSE === $createFieldsForMe) {
-        $io->text(sprintf('Not creating fields for %s, it is using a custom bundle class.', static::linkClass($bundleClass)));
+        $io->text(\sprintf('Not creating fields for %s, it is using a custom bundle class.', static::linkClass($bundleClass)));
         continue;
       }
 
@@ -214,7 +216,7 @@ final class BundleClassHealthCheck extends Command {
 
       // Field storage and instances.
       $io->newLine();
-      $io->text(sprintf('Field instances for bundle `%s:%s` [`%s`]', $entityTypeId, $bundle, static::linkClass($bundleClass)));
+      $io->text(\sprintf('Field instances for bundle `%s:%s` [`%s`]', $entityTypeId, $bundle, static::linkClass($bundleClass)));
       $io->newLine();
       $rows = [];
       foreach ($okFieldInstances as $field) {
@@ -233,7 +235,7 @@ final class BundleClassHealthCheck extends Command {
       $io->table(['Type', 'Field Name', 'Status'], $rows);
 
       if ($taskCreateFieldStorage->count() !== 0 || $taskCreateFieldInstance->count() !== 0) {
-        if (FALSE === $io->confirm('Create missing fields?', default: false)) {
+        if (FALSE === $io->confirm('Create missing fields?', default: FALSE)) {
           $io->warning('Skipped creating fields');
           continue;
         }
@@ -257,19 +259,17 @@ final class BundleClassHealthCheck extends Command {
     return static::SUCCESS;
   }
 
-  private static function ideLink(string $path, int $line): string
-  {
-    return sprintf(static::$ideLaunch, $path, (string) $line);
+  private static function ideLink(string $path, int $line): string {
+    return \sprintf(static::$ideLaunch, $path, (string) $line);
   }
 
-  private static function href(string $uri, string $innerText): string
-  {
+  private static function href(string $uri, string $innerText): string {
     return "\e]8;;{$uri}\e\\{$innerText}\e]8;;\e\\";
   }
 
   private static function linkClass($classString): string {
     $rClass = new \ReflectionClass($classString);
-    return static::href(static::ideLink(substr($rClass->getFileName(), \strlen('/data')), $rClass->getStartLine() ?: 0), $classString);
+    return static::href(static::ideLink(\substr($rClass->getFileName(), \strlen('/data')), $rClass->getStartLine() ?: 0), $classString);
   }
 
 }

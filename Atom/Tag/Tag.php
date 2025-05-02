@@ -1,10 +1,8 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\Tag;
-
-use PreviousNext\Ds\Common\Component;
 
 final class Tag {
 

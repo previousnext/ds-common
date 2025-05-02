@@ -1,14 +1,13 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\Html;
 
 use Drupal\Component\Render\MarkupInterface;
-use PreviousNext\Ds\Common\Component;
 
 /**
- * Rich text
+ * Rich text.
  */
 final class Html {
 

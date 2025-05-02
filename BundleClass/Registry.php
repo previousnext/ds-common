@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\BundleClass;
 
@@ -10,7 +10,7 @@ final class Registry {
 
   private static array $classes = [
     BundleClass\BlockContent\Card\CardBundle::class,
-    BundleClass\TaxonomyTerm\TermTag::class
+    BundleClass\TaxonomyTerm\TermTag::class,
   ];
 
   /**

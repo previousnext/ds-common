@@ -52,15 +52,15 @@ final class ModifierBag extends Set {
    */
   public function getInstancesOf(string $classString): ModifierBag {
     /** @var static<R> */
-    return $this->filter(function ($item) use ($classString) {
+    return $this->filter(static function ($item) use ($classString) {
       return $item instanceof $classString;
     });
   }
 
-  public function offsetSet(mixed $offset, mixed $value): void
-  {
+  public function offsetSet(mixed $offset, mixed $value): void {
     if ($value instanceof \UnitEnum) {
-      // Is the enum being added mutually exclusive (doesn't allow another enum of the same type to be added in the same ModifierBag instance.
+      // Is the enum being added mutually exclusive (doesn't allow another enum
+      // of the same type to be added in the same ModifierBag instance.
       if ((new \ReflectionClass($value))->getAttributes(Mutex::class, \ReflectionAttribute::IS_INSTANCEOF) !== []) {
         $valueClass = $value::class;
         foreach ($this as $item) {

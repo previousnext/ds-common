@@ -1,11 +1,10 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\Link;
 
 use Drupal\Core\Url;
-use PreviousNext\Ds\Common\Component;
 
 class Link {
 

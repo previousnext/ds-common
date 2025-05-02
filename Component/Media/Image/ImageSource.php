@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Media\Image;
 
@@ -17,8 +17,8 @@ final class ImageSource {
     string $srcset,
     string $media,
     string $type,
-  ) {
-    return new static($srcset, $media, $type);
+  ): self {
+    return new self($srcset, $media, $type);
   }
 
 }

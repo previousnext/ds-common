@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Media\ExternalVideo;
 
 use Drupal\Core\Template\Attribute;
+use Pinto\Slots;
 use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Utility;
-use Pinto\Slots;
 
-class ExternalVideo implements Component\Media\MediaComponentInterface {
+class ExternalVideo implements Component\Media\MediaComponentInterface, Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
@@ -20,7 +20,7 @@ class ExternalVideo implements Component\Media\MediaComponentInterface {
     public readonly string $source,
     public readonly string $title,
     public readonly ?int $duration,
-    public Attribute $containerAttributes
+    public Attribute $containerAttributes,
   ) {}
 
   /**
@@ -49,9 +49,8 @@ class ExternalVideo implements Component\Media\MediaComponentInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('containerAttributes', $this->containerAttributes)
-    ;
+      ->set('containerAttributes', $this->containerAttributes);
   }
-  // @todo fromExternalVideoMedia factory, just like image.
 
+  // @todo fromExternalVideoMedia factory, just like image.
 }

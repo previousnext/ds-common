@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\List;
 
-use Pinto\Attribute\Asset;
 use Pinto\Attribute\Definition;
 use Pinto\Attribute\ObjectType;
 use Pinto\List\ObjectListInterface;
@@ -50,7 +49,7 @@ enum CommonComponents implements ObjectListInterface {
   case Media;
 
   public function templateDirectory(): string {
-    return sprintf('@%s/%s', Twig::Namespace, $this->resolveSubDirectory());
+    return \sprintf('@%s/%s', Twig::NAMESPACE, $this->resolveSubDirectory());
   }
 
 }

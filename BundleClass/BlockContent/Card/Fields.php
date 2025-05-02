@@ -14,13 +14,13 @@ use PreviousNext\Ds\Common\BundleClass\TaxonomyTerm\TermTagInterface;
 
 enum Fields: string implements ExpectedFieldInterface {
 
+  use ExpectedFieldTrait;
+
   case CardDate = 'card_date';
   case CardIcon = 'card_icon';
   case CardImage = 'card_image';
   case CardLinks = 'card_links';
   case CardTags = 'card_tags';
-
-  use ExpectedFieldTrait;
 
   public function getMachineName(): string {
     return $this->value;

@@ -1,16 +1,16 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\HeroBanner;
 
 use Drupal\Core\Template\Attribute;
+use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
-use PreviousNext\Ds\Common\Atom;
 
-class HeroBanner {
+class HeroBanner implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
@@ -37,7 +37,7 @@ class HeroBanner {
     ?Component\LinkList\LinkList $links = NULL,
   ): static {
     if ($image !== NULL && $links !== NULL) {
-      throw new \LogicException(sprintf('A `%s` object cannot have both $image and $links populated.', static::class));
+      throw new \LogicException(\sprintf('A `%s` object cannot have both $image and $links populated.', static::class));
     }
 
     return static::factoryCreate(

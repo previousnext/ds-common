@@ -13,7 +13,7 @@ interface ExpectedFieldInterface extends \BackedEnum {
   public function getMachineName(): string;
 
   /**
-   * @return class-string<\Drupal\Core\Field\FieldItemInterface>
+   * @phpstan-return class-string<\Drupal\Core\Field\FieldItemInterface>
    */
   public function fieldInterface(): string;
 
@@ -35,12 +35,12 @@ interface ExpectedFieldInterface extends \BackedEnum {
   public function fieldInstance(BundleClassMetadata $metadata): FieldConfigInterface;
 
   /**
-   * @return array<string, mixed>
+   * @phpstan-return array<string, mixed>
    */
   public function storageSettings(): array;
 
   /**
-   * @return array<string, mixed>
+   * @phpstan-return array<string, mixed>
    */
   public function instanceSettings(): array;
 

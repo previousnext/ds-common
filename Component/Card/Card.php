@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Card;
 
@@ -13,8 +13,8 @@ use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\BundleClass;
 use PreviousNext\Ds\Common\Component as CommonComponents;
-use PreviousNext\Ds\Common\Utility;
 use PreviousNext\Ds\Common\Modifier;
+use PreviousNext\Ds\Common\Utility;
 
 #[ObjectType\Slots(slots: [
   'image',
@@ -48,15 +48,12 @@ class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
     public Attribute $containerAttributes,
   ) {}
 
-  /**
-   * @phpstan-param iterable<CardModifierInterface>
-   */
   public static function create(
     ?CommonComponents\Media\Image\Image $image,
     ?CommonComponents\LinkList\LinkList $links,
     ?\DateTimeInterface $date = NULL,
     ?Atom\Icon\Icon $icon = NULL,
-    Atom\Tag\Tags $tags = NULL,
+    ?Atom\Tag\Tags $tags = NULL,
     ?Atom\Heading\Heading $heading = NULL,
     ?Atom\Html\Html $content = NULL,
     ?Atom\Link\Link $link = NULL,
@@ -97,33 +94,18 @@ class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
     );
   }
 
-//  protected function build(Slots\Build $build): Slots\Build {
-//    return $build
-//      ->set('image', $this->image)
-//      ->set('icon', $this->icon)
-//      ->set('links', $this->links)
-//      ->set('date', $this->date)
-//      ->set('tags', $this->tags)
-//      ->set('heading', $this->heading)
-//      ->set('content', $this->content)
-//      ->set('link', $this->link)
-//      ->set('modifiers', $this->modifiers)
-//      ->set('containerAttributes', new Attribute(['class' => \array_filter(\array_map(fn (CardModifierInterface $modifier): ?string => $modifier->className(), $this->modifiers->toArray()))]))
-//    ;
-//  }
-
-    protected function build(Slots\Build $build): Slots\Build {
-      // This is built in Common since there is a shared benefit from functionality of a common interface.
-      foreach ($this->modifiers as $modifier) {
-        assert($modifier instanceof CardModifierInterface);
-        $this->containerAttributes->addClass($modifier->className());
-      }
-      return $build
-        ->set('containerAttributes', $this->containerAttributes);
+  protected function build(Slots\Build $build): Slots\Build {
+    // This is built in Common since there is a shared benefit from
+    // functionality of a common interface.
+    foreach ($this->modifiers as $modifier) {
+      $this->containerAttributes->addClass($modifier->className());
     }
+    return $build
+      ->set('containerAttributes', $this->containerAttributes);
+  }
 
   public static function createForLayoutBuilderBlockContent(BlockContentInterface $blockContent, ObjectContextInterface $objectContext): static {
-    assert($blockContent instanceof BundleClass\BlockContent\Card\CardBundle);
+    \assert($blockContent instanceof BundleClass\BlockContent\Card\CardBundle);
     return static::createFrom($blockContent);
   }
 

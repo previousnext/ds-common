@@ -41,7 +41,6 @@ trait ExpectedFieldTrait {
     ]);
   }
 
-
   public function entityReferenceTargets(): array {
     return match ($this) {
       default => throw new \LogicException('Not an ER field'),
@@ -59,7 +58,7 @@ trait ExpectedFieldTrait {
 
     return [
       'handler_settings' => [
-        'target_bundles' => array_combine($bundles, $bundles),
+        'target_bundles' => \array_combine($bundles, $bundles),
       ],
     ];
   }

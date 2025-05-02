@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\InPageAlert;
 
@@ -15,11 +15,11 @@ use PreviousNext\Ds\Common\Utility;
   'content',
   'link',
 ])]
-class InPageAlert {
+class InPageAlert implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
-  private function __construct(
+  final private function __construct(
     protected Atom\Heading\Heading $heading,
     protected Type $type,
     protected Atom\Html\Html $content,
@@ -32,7 +32,7 @@ class InPageAlert {
     Type $type,
     Atom\Html\Html $content,
     ?Atom\Link\Link $link = NULL,
-  ) {
+  ): static {
     return static::factoryCreate(
       $heading,
       $type,
@@ -46,8 +46,8 @@ class InPageAlert {
       ->set('heading', $this->heading->heading)
       ->set('type', $this->type->name)
       ->set('content', $this->content->markup)
-      ->set('link', '') // @todo
-    ;
+      // @todo
+      ->set('link', '');
   }
 
 }

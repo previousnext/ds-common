@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace PreviousNext\Ds\Common\BundleClass\ExpectedFields;
 
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
@@ -40,4 +39,4 @@ final class EntityReferenceResolver {
 }
 
 
-  //repos/common-lib/BundleClass/TaxonomyTerm/TermTagInterface.php
+// repos/common-lib/BundleClass/TaxonomyTerm/TermTagInterface.php.

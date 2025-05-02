@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Accordion;
 
 use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
-use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Utility;
 use Ramsey\Collection\AbstractCollection;
 
@@ -21,45 +20,34 @@ use Ramsey\Collection\AbstractCollection;
   new Slots\Slot('modifier', defaultValue: NULL),
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
-class Accordion extends AbstractCollection {
+class Accordion extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
   private function __construct(
     protected string $title,
-    public Attribute $containerAttributes
+    public Attribute $containerAttributes,
   ) {
     parent::__construct();
   }
 
-  public function getType(): string
-  {
+  public function getType(): string {
     return '\\PreviousNext\\Ds\Common\\Component\\Accordion\\AccordionItem\\AccordionItem';
   }
 
   public static function create(
-    string $title
-  ) {
+    string $title,
+  ): static {
     return static::factoryCreate(
       $title,
       containerAttributes: new Attribute(),
     );
   }
 
-//  protected function build(Slots\Build $build): Slots\Build {
-//    return $build
-//      ->set('items', $this->map(fn (AccordionItem\AccordionItem $item): mixed => $item())->toArray())
-//      ->set('title', 'Accordion title!')
-//      ->set('toggleAll', NULL)
-//      ->set('modifier', '')
-//    ;
-//  }
-
-    protected function build(Slots\Build $build): Slots\Build {
-      return $build
-        ->set('items', $this->map(fn (AccordionItem\AccordionItem $item): mixed => $item())->toArray())
-      ;
-    }
+  protected function build(Slots\Build $build): Slots\Build {
+    return $build
+      ->set('items', $this->map(static fn (AccordionItem\AccordionItem $item): mixed => $item())->toArray());
+  }
 
   /**
    * @phpstan-return $this

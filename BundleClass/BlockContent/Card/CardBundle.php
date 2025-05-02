@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\BundleClass\BlockContent\Card;
 
 use Drupal\block_content\Entity\BlockContentType;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\pinto_block\Attribute\PintoBlock;
-use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\BundleClass;
 use PreviousNext\Ds\Common\Component\Card;
 

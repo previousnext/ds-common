@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\LinkList;
 
@@ -17,18 +17,18 @@ use Ramsey\Collection\AbstractCollection;
   'items',
   new Slots\Slot('modifier', defaultValue: NULL),
 ])]
-class LinkList extends AbstractCollection {
+class LinkList extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
-  private function __construct(
+  // @phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod.Found
+  final private function __construct(
     array $links,
   ) {
     parent::__construct($links);
   }
 
-  public function getType(): string
-  {
+  public function getType(): string {
     return '\\PreviousNext\\Ds\Common\\Atom\\Link\\Link';
   }
 
@@ -43,13 +43,9 @@ class LinkList extends AbstractCollection {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('items', $this->map(fn (Atom\Link\Link $link): mixed => $link->renderArray())->toArray())
-    ;
+      ->set('items', $this->map(static fn (Atom\Link\Link $link): mixed => $link->renderArray())->toArray());
   }
 
-  /**
-   * @phpstan-param \PreviousNext\Ds\Common\Atom\Link\Link[] $links
-   */
   public static function fromLinks(Atom\Link\Links $links): static {
     return new static($links->toArray());
   }

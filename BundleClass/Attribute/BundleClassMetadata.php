@@ -10,7 +10,7 @@ final class BundleClassMetadata {
   public string $bundle;
 
   /**
-   * @param array<class-string<\Drupal\Core\Entity\EntityInterface>>|null $ifNotMeThenA
+   * @phpstan-param array<class-string<\Drupal\Core\Entity\EntityInterface>>|null $ifNotMeThenA
    */
   public function __construct(
     public string $entityTypeId,

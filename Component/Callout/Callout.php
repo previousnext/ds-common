@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Callout;
 
@@ -9,21 +9,21 @@ use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
 
-class Callout {
+class Callout implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
-  private function __construct(
+  final private function __construct(
     public Atom\Heading\Heading $heading,
     public Atom\Html\Html $content,
-    public Attribute $containerAttributes
+    public Attribute $containerAttributes,
   ) {
   }
 
   public static function create(
     Atom\Heading\Heading $heading,
     Atom\Html\Html $content,
-  ) {
+  ): static {
     return static::factoryCreate(
       $heading,
       $content,
@@ -34,8 +34,7 @@ class Callout {
   protected function build(Slots\Build $build): Slots\Build {
     return $build
       ->set('heading', $this->heading->heading)
-      ->set('content', $this->content->markup)
-      ;
+      ->set('content', $this->content->markup);
   }
 
 }

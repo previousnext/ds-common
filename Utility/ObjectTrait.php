@@ -15,13 +15,11 @@ use Pinto\Slots;
 trait ObjectTrait {
 
   use CanonicalFactoryTrait {
-    // Refer to the original method via factoryCreate
+    // Refer to the original method via factoryCreate.
     CanonicalFactoryTrait::factoryCreate as protected;
   }
   use PintoObject\DrupalObjectTrait;
   use Cache\RefinableCacheableDependencyTrait;
-
-
 
   final public function __invoke(): array {
     $built = $this->pintoBuild(function (mixed $build): mixed {

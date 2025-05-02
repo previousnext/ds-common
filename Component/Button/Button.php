@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Button;
 
@@ -24,12 +24,12 @@ class Button implements Utility\CommonObjectInterface {
     string $title,
     ButtonType $as,
     ?Atom\Link\Link $link = NULL,
-    string $modifier = NULL,
+    ?string $modifier = NULL,
     bool $disabled = FALSE,
     ?Atom\Icon\Icon $icon = NULL,
   ): static {
     if ($link !== NULL && $as !== ButtonType::Link) {
-      throw new \LogicException(sprintf('Buttons of type `%s::%s` should not have a `%s`', $as::class, $as->name, Atom\Link\Link::class));
+      throw new \LogicException(\sprintf('Buttons of type `%s::%s` should not have a `%s`', $as::class, $as->name, Atom\Link\Link::class));
     }
 
     return static::factoryCreate(

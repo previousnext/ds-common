@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Accordion\AccordionItem;
 
@@ -10,11 +10,11 @@ use PreviousNext\Ds\Common\Utility;
 /**
  * @see \PreviousNext\Ds\Common\Component\Accordion\Accordion
  */
-class AccordionItem {
+class AccordionItem implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
-  private function __construct(
+  final private function __construct(
     public string $title,
     public string $content,
     public bool $open,
