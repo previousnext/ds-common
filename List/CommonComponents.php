@@ -21,9 +21,6 @@ enum CommonComponents implements ObjectListInterface {
   #[Definition(Component\Accordion\AccordionItem\AccordionItem::class)]
   case AccordionItem;
 
-  #[Definition(Component\Button\Button::class)]
-  case Button;
-
   #[Definition(Component\Callout\Callout::class)]
   case Callout;
 

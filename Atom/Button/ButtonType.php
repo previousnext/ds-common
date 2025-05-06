@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PreviousNext\Ds\Common\Component\Button;
+namespace PreviousNext\Ds\Common\Atom\Button;
 
 enum ButtonType {
 

@@ -15,6 +15,9 @@ enum CommonAtoms implements ObjectListInterface {
 
   use ListTrait;
 
+  #[Definition(Atom\Button\Button::class)]
+  case Button;
+
   #[Definition(Atom\Heading\Heading::class)]
   case Heading;
 

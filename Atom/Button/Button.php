@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PreviousNext\Ds\Common\Component\Button;
+namespace PreviousNext\Ds\Common\Atom\Button;
 
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
@@ -17,7 +17,8 @@ class Button implements Utility\CommonObjectInterface {
     public ButtonType $as,
     public ?string $modifier,
     public bool $disabled,
-    public ?Atom\Icon\Icon $icon,
+    public ?Atom\Icon\Icon $iconStart,
+    public ?Atom\Icon\Icon $iconEnd,
   ) {}
 
   public static function create(
@@ -26,7 +27,8 @@ class Button implements Utility\CommonObjectInterface {
     ?string $href = NULL,
     ?string $modifier = NULL,
     bool $disabled = FALSE,
-    ?Atom\Icon\Icon $icon = NULL,
+    ?Atom\Icon\Icon $iconStart = NULL,
+    ?Atom\Icon\Icon $iconEnd = NULL,
   ): static {
     if ($href !== NULL && $as !== ButtonType::Link) {
       throw new \LogicException(\sprintf('Buttons of type `%s::%s` should not have a `%s`', $as::class, $as->name, Atom\Link\Link::class));
@@ -38,7 +40,8 @@ class Button implements Utility\CommonObjectInterface {
       $as,
       $modifier,
       $disabled,
-      $icon,
+      $iconStart,
+      $iconEnd,
     );
   }
 
