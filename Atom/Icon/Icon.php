@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\Icon;
 
-final class Icon {
+use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
+use PreviousNext\Ds\Common\Utility\ObjectTrait;
+
+final class Icon implements CommonObjectInterface {
+
+  use ObjectTrait;
 
   private function __construct(
     public string $icon,

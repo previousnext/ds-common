@@ -10,7 +10,7 @@ use Pinto\List\ObjectListInterface;
 use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Utility\Twig;
 
-#[ObjectType\Slots(bindPromotedProperties: TRUE, method: 'create')]
+#[ObjectType\Slots(method: 'create', bindPromotedProperties: TRUE)]
 enum CommonComponents implements ObjectListInterface {
 
   use ListTrait;

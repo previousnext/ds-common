@@ -52,14 +52,17 @@ trait ListTrait {
     /** @var string $fileName */
     $fileName = (new \ReflectionClass($definition->className))->getFileName();
     $objectClassDir = \dirname($fileName);
+    // @todo Improve this.
     return \substr(
       string: $objectClassDir,
       offset: (
         // @phpstan-ignore-next-line
+        \strpos($objectClassDir, 'Atom/') ?: (
+        // @phpstan-ignore-next-line
         \strpos($objectClassDir, 'Component/') ?: (
         // @phpstan-ignore-next-line
         \strpos($objectClassDir, 'Layout/') ?: throw new \LogicException(\sprintf('Couldnt resolve %s component.', $definition->className))
-      )),
+        ))),
     );
   }
 

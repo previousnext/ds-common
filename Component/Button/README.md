@@ -11,7 +11,7 @@ use PreviousNext\Ds\Common\Component as CommonComponents;
 $build['ButtonLink'] = CommonComponents\Button\Button::create(
   title: 'Link button',
   as: CommonComponents\Button\ButtonType::Link,
-  link: Atom\Link\Link::fromUrl(Url::fromRoute('<front>')),
+  href: Atom\Link\Link::fromUrl(Url::fromRoute('<front>')),
 )();
 ```
 

@@ -13,7 +13,7 @@ class Button implements Utility\CommonObjectInterface {
 
   final private function __construct(
     public string $title,
-    public ?Atom\Link\Link $link,
+    public ?string $href,
     public ButtonType $as,
     public ?string $modifier,
     public bool $disabled,
@@ -23,18 +23,18 @@ class Button implements Utility\CommonObjectInterface {
   public static function create(
     string $title,
     ButtonType $as,
-    ?Atom\Link\Link $link = NULL,
+    ?string $href = NULL,
     ?string $modifier = NULL,
     bool $disabled = FALSE,
     ?Atom\Icon\Icon $icon = NULL,
   ): static {
-    if ($link !== NULL && $as !== ButtonType::Link) {
+    if ($href !== NULL && $as !== ButtonType::Link) {
       throw new \LogicException(\sprintf('Buttons of type `%s::%s` should not have a `%s`', $as::class, $as->name, Atom\Link\Link::class));
     }
 
     return static::factoryCreate(
       $title,
-      $link,
+      $href,
       $as,
       $modifier,
       $disabled,

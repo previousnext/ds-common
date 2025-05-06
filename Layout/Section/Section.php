@@ -67,7 +67,7 @@ class Section implements Utility\CommonObjectInterface {
       ->set('as', $this->as)
       ->set('heading', $this->heading)
       ->set('content', $this->content->markup)
-      ->set('link', $this->link instanceof Atom\Link\LinkWithLabel ? $this->link->markup() : $this->link->url)
+      ->set('link', $this->link)
       ->set('modifiers', NULL);
   }
 

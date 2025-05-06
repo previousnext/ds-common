@@ -7,22 +7,28 @@ namespace PreviousNext\Ds\Common\List;
 use Pinto\Attribute\Definition;
 use Pinto\Attribute\ObjectType;
 use Pinto\List\ObjectListInterface;
-use PreviousNext\Ds\Common\Layout;
+use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility\Twig;
 
 #[ObjectType\Slots(method: 'create', bindPromotedProperties: TRUE)]
-enum CommonLayouts implements ObjectListInterface {
+enum CommonAtoms implements ObjectListInterface {
 
   use ListTrait;
 
-  #[Definition(Layout\Grid\Grid::class)]
-  case Grid;
+  #[Definition(Atom\Heading\Heading::class)]
+  case Heading;
 
-  #[Definition(Layout\Grid\GridItem\GridItem::class)]
-  case GridItem;
+  #[Definition(Atom\Html\Html::class)]
+  case Html;
 
-  #[Definition(Layout\Section\Section::class)]
-  case Section;
+  #[Definition(Atom\Icon\Icon::class)]
+  case Icon;
+
+  #[Definition(Atom\Link\Link::class)]
+  case Link;
+
+  #[Definition(Atom\Tag\Tag::class)]
+  case Tag;
 
   public function templateDirectory(): string {
     return \sprintf('@%s/%s', Twig::NAMESPACE, $this->resolveSubDirectory());

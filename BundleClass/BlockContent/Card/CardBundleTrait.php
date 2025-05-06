@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\BundleClass\BlockContent\Card;
 
-use Drupal\Core\Url;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\link\Plugin\Field\FieldType\LinkItem;
 use Drupal\media\MediaInterface;
@@ -22,9 +21,9 @@ trait CardBundleTrait {
 
     foreach ($this->get(BlockContent\Card\Fields::CardLinks->getMachineName()) as $linkItem) {
       \assert($linkItem instanceof LinkItem);
-      $links[] = Atom\Link\LinkWithLabel::fromLabelAndUrl(
-        $linkItem->title,
-        Url::fromUri($linkItem->uri),
+      $links[] = Atom\Link\Link::create(
+        $linkItem->getTitle(),
+        $linkItem->getUrl(),
       );
     }
 
