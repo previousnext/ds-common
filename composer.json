@@ -1,6 +1,7 @@
 {
     "name": "previousnext/ds-common",
     "type": "library",
+    "version": "0.0.1",
     "require": {
         "php": ">=8.2",
         "ramsey/collection": "^2.1.1",

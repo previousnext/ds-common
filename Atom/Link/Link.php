@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\Link;
 
+use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use PreviousNext\Ds\Common\Atom\Icon\Icon;
 use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
@@ -22,6 +23,7 @@ class Link implements CommonObjectInterface {
     public bool $download = FALSE,
     public ?Icon $iconStart = NULL,
     public ?Icon $iconEnd = NULL,
+    public Attribute $attributes = new Attribute(),
   ) {
   }
 

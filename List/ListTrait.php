@@ -17,7 +17,7 @@ trait ListTrait {
   public function name(): string {
     $name = $this instanceof \BackedEnum ? $this->value : $this->name;
     // Make the hook_theme() key unique between lists.
-    return \sprintf('%s-%s', \substr(\md5(static::class), 0, 10), $name);
+    return \sprintf('%s-%s-%s', \substr(\md5(static::class), 0, 10), (new \ReflectionClass(static::class))->getShortName(), $name);
   }
 
   public function libraryName(): string {
@@ -30,15 +30,11 @@ trait ListTrait {
   }
 
   public function cssDirectory(): string {
-    // @todo fix Pinto to allow DRUPAL_ROOT relative paths like you could in
-    // 0.1.6.
-    return '/data/app/libraries/ids';
+    return \Safe\realpath(\DRUPAL_ROOT) . '/libraries/ids';
   }
 
   public function jsDirectory(): string {
-    // @todo fix Pinto to allow DRUPAL_ROOT relative paths like you could in
-    // 0.1.6.
-    return '/data/app/libraries/ids';
+    return \Safe\realpath(\DRUPAL_ROOT) . '/libraries/ids';
   }
 
   /**

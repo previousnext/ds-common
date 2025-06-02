@@ -5,7 +5,7 @@
   external ? baseClass~'--external' : null,
   download ? baseClass~'--download' : null,
 ] %}
-{% set attributes = (attributes|default(create_attribute())).addClass(classes) %}
+{% set attributes = (attributes ?? create_attribute()).addClass(classes) %}
 
 <a{{ attributes }} href="{{ href }}"{% if current %} aria-current="page"{% endif %}>
   {{ iconStart }}
