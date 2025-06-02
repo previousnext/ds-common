@@ -15,6 +15,7 @@ use PreviousNext\Ds\Common\BundleClass;
 use PreviousNext\Ds\Common\Component as CommonComponents;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
 #[ObjectType\Slots(slots: [
   'image',
@@ -28,6 +29,7 @@ use PreviousNext\Ds\Common\Utility;
   'modifiers',
   'containerAttributes',
 ])]
+#[Scenarios([CardScenarios::class])]
 class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
 
   use Utility\ObjectTrait;

@@ -9,7 +9,9 @@ use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
+#[Scenarios([HeroBannerScenarios::class])]
 class HeroBanner implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

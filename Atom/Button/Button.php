@@ -6,7 +6,9 @@ namespace PreviousNext\Ds\Common\Atom\Button;
 
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
+#[Scenarios([ButtonScenarios::class])]
 class Button implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

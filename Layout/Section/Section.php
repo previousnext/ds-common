@@ -11,6 +11,7 @@ use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
 #[ObjectType\Slots(slots: [
   'background',
@@ -22,6 +23,7 @@ use PreviousNext\Ds\Common\Utility;
   'modifiers',
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
+#[Scenarios([SectionScenarios::class])]
 class Section implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

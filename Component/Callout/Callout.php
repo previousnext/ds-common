@@ -8,7 +8,9 @@ use Drupal\Core\Template\Attribute;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
+#[Scenarios([CalloutScenarios::class])]
 class Callout implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

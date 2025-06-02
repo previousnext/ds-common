@@ -64,7 +64,7 @@ class Image implements Component\Media\MediaComponentInterface, Utility\CommonOb
 
   public static function createSample(int $width, int $height): static {
     return static::create(
-      \sprintf('https://picsum.photos/%d/%d', $width, $height),
+      \sprintf('https://picsum.photos/seed/%s/%d/%d', \date('Y-m-d'), $width, $height),
       'Picsum Sample',
       $width,
       $height,

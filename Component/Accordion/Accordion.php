@@ -8,6 +8,7 @@ use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 use Ramsey\Collection\AbstractCollection;
 
 /**
@@ -20,6 +21,7 @@ use Ramsey\Collection\AbstractCollection;
   new Slots\Slot('modifier', defaultValue: NULL),
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
+#[Scenarios([AccordionScenarios::class])]
 class Accordion extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

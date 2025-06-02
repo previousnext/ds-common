@@ -8,7 +8,9 @@ use Drupal\Core\Template\Attribute;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
+#[Scenarios([ExternalVideoScenarios::class])]
 class ExternalVideo implements Component\Media\MediaComponentInterface, Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
@@ -40,11 +42,9 @@ class ExternalVideo implements Component\Media\MediaComponentInterface, Utility\
   }
 
   public static function createSample(): static {
-    return static::create(
-      'https://www.youtube.com/watch?v=QrGrOK8oZG8',
-      'Too Many Cooks 👨‍🍳',
-      671,
-    );
+    // We keep this abstraction so we can change scenarios at any time,
+    // including downstream.
+    return ExternalVideoScenarios::externalVideo();
   }
 
   protected function build(Slots\Build $build): Slots\Build {

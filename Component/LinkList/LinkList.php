@@ -8,6 +8,7 @@ use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 use Ramsey\Collection\AbstractCollection;
 
 /**
@@ -17,6 +18,7 @@ use Ramsey\Collection\AbstractCollection;
   'items',
   new Slots\Slot('modifier', defaultValue: NULL),
 ])]
+#[Scenarios([LinkListScenarios::class])]
 class LinkList extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

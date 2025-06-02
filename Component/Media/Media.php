@@ -8,6 +8,7 @@ use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
 #[ObjectType\Slots(slots: [
   // @todo fix up these
@@ -18,6 +19,7 @@ use PreviousNext\Ds\Common\Utility;
   'mediaType',
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
+#[Scenarios([MediaScenarios::class])]
 class Media implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

@@ -9,6 +9,7 @@ use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 use Ramsey\Collection\AbstractCollection;
 
 /**
@@ -20,6 +21,7 @@ use Ramsey\Collection\AbstractCollection;
   'as',
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
+#[Scenarios([GridScenarios::class])]
 class Grid extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;

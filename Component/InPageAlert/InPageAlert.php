@@ -8,6 +8,7 @@ use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
 #[ObjectType\Slots(slots: [
   'heading',
@@ -15,6 +16,7 @@ use PreviousNext\Ds\Common\Utility;
   'content',
   'link',
 ])]
+#[Scenarios([InPageAlertScenarios::class])]
 class InPageAlert implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
