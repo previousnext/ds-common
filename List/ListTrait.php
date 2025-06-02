@@ -48,17 +48,17 @@ trait ListTrait {
     /** @var string $fileName */
     $fileName = (new \ReflectionClass($definition->className))->getFileName();
     $objectClassDir = \dirname($fileName);
-    // @todo Improve this.
+    // Determine the directory path part after matching against a namespace/dir.
+    $offset = match (TRUE) {
+      \str_contains($objectClassDir, 'Atom/') => \strpos($objectClassDir, 'Atom/'),
+      \str_contains($objectClassDir, 'Component/') => \strpos($objectClassDir, 'Component/'),
+      \str_contains($objectClassDir, 'Layout/') => \strpos($objectClassDir, 'Layout/'),
+      \str_contains($objectClassDir, 'Etc/') => \strpos($objectClassDir, 'Etc/'),
+      default => throw new \LogicException(\sprintf('Couldnt resolve %s component.', $definition->className)),
+    };
     return \substr(
       string: $objectClassDir,
-      offset: (
-        // @phpstan-ignore-next-line
-        \strpos($objectClassDir, 'Atom/') ?: (
-        // @phpstan-ignore-next-line
-        \strpos($objectClassDir, 'Component/') ?: (
-        // @phpstan-ignore-next-line
-        \strpos($objectClassDir, 'Layout/') ?: throw new \LogicException(\sprintf('Couldnt resolve %s component.', $definition->className))
-        ))),
+      offset: $offset,
     );
   }
 

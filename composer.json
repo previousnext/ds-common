@@ -6,12 +6,16 @@
         "php": ">=8.2",
         "ramsey/collection": "^2.1.1",
         "symfony/string": "^7.2",
-        "dpi/pinto": "^0"
+        "dpi/pinto": "^0.4.1",
+        "symfony/runtime": "^6.2 || ^7"
     },
     "autoload": {
         "psr-4": {
             "PreviousNext\\Ds\\Common\\": "."
         }
     },
-    "license": "proprietary"
+    "license": "proprietary",
+    "bin": [
+        "Etc/bin/ace"
+    ]
 }
