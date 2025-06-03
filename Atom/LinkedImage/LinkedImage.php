@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\LinkedImage;
 
+use Drupal\Core\Template\Attribute;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom as CommonAtoms;
 use PreviousNext\Ds\Common\Component as CommonComponents;
@@ -16,7 +17,8 @@ class LinkedImage implements CommonObjectInterface {
 
   final private function __construct(
     protected CommonComponents\Media\Image\Image $image,
-    protected CommonAtoms\Link\Link $href,
+    protected CommonAtoms\Link\Link $link,
+    public Attribute $containerAttributes,
   ) {
   }
 
@@ -27,13 +29,12 @@ class LinkedImage implements CommonObjectInterface {
     return static::factoryCreate(
       $image,
       $link,
+      containerAttributes: new Attribute(),
     );
   }
 
   protected function build(Slots\Build $build): Slots\Build {
-    return $build
-      ->set('href', $this->href->href)
-      ->set('image', $this->image);
+    return $build;
   }
 
 }

@@ -15,6 +15,9 @@ enum CommonLayouts implements ObjectListInterface {
 
   use ListTrait;
 
+  #[Definition(Layout\Footer\Footer::class)]
+  case Footer;
+
   #[Definition(Layout\Grid\Grid::class)]
   case Grid;
 

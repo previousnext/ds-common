@@ -46,7 +46,7 @@ class SearchForm implements CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     $icon = CommonAtoms\Icon\Icon::create('search');
-    $icon->attributes['class'][] = 'mx-icon--search';
+    $icon->containerAttributes['class'][] = 'mx-icon--search';
 
     return $build
       ->set('input', 'Foo')

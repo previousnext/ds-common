@@ -11,6 +11,7 @@ use PreviousNext\Ds\Common\Atom\LinkedImage\LinkedImage;
 use PreviousNext\Ds\Common\Component\SearchForm\SearchForm;
 use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
 use PreviousNext\Ds\Common\Utility\ObjectTrait;
+use PreviousNext\Ds\Common\Vo\MenuTree\MenuTrees;
 use PreviousNext\IdsTools\Scenario\Scenarios;
 use Ramsey\Collection\Collection;
 use Ramsey\Collection\CollectionInterface;
@@ -26,7 +27,6 @@ class Header implements CommonObjectInterface {
   protected ?SearchForm $search;
 
   /**
-   * @phpstan-param \Ramsey\Collection\CollectionInterface<\PreviousNext\Ds\Common\Vo\MenuTree\MenuTree> $menu
    * @phpstan-param \Ramsey\Collection\CollectionInterface<\PreviousNext\Ds\Common\Atom\Button\Button> $controls
    */
   final private function __construct(
@@ -34,7 +34,7 @@ class Header implements CommonObjectInterface {
     protected ?string $title,
     protected ?string $description,
     protected bool $hasSearch,
-    protected CollectionInterface $menu,
+    protected MenuTrees $menu,
     protected CollectionInterface $controls,
   ) {
   }
@@ -46,14 +46,13 @@ class Header implements CommonObjectInterface {
    * initialise Navigation on its own.
    *
    * @phpstan-param iterable<CommonAtoms\Button\Button> $controls
-   * @phpstan-param iterable<\PreviousNext\Ds\Common\Vo\MenuTree\MenuTree> $menu
    */
   public static function create(
     LinkedImage $logo,
     ?string $title = NULL,
     ?string $description = NULL,
     bool $hasSearch = FALSE,
-    iterable $menu = [],
+    MenuTrees $menu = new MenuTrees(),
     iterable $controls = [],
   ): static {
     return static::factoryCreate(
@@ -61,7 +60,7 @@ class Header implements CommonObjectInterface {
       title: $title,
       description: $description,
       hasSearch: $hasSearch,
-      menu: new Collection(\PreviousNext\Ds\Common\Vo\MenuTree\MenuTree::class, \iterator_to_array($menu)),
+      menu: $menu,
       controls: new Collection(CommonAtoms\Button\Button::class, \iterator_to_array($controls)),
     );
   }

@@ -32,8 +32,9 @@ final class ModifierBag extends Set {
   }
 
   /**
-   * @phpstan-param class-string $classString
-   * @phpstan-return T|null
+   * @phpstan-param class-string<F> $classString
+   * @phpstan-return F|null
+   * @template F of T
    */
   public function getFirstInstanceOf(string $classString) {
     foreach ($this->getInstancesOf($classString) as $item) {

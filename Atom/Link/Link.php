@@ -17,12 +17,12 @@ class Link implements CommonObjectInterface {
   private function __construct(
     public string $title,
     public string $href,
-    public bool $more = FALSE,
-    public bool $external = FALSE,
-    public bool $current = FALSE,
-    public bool $download = FALSE,
-    public ?Icon $iconStart = NULL,
-    public ?Icon $iconEnd = NULL,
+    public bool $more,
+    public bool $external,
+    public bool $current,
+    public bool $download,
+    public ?Icon $iconStart,
+    public ?Icon $iconEnd,
     public Attribute $attributes = new Attribute(),
   ) {
   }
