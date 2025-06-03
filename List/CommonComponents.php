@@ -21,6 +21,9 @@ enum CommonComponents implements ObjectListInterface {
   #[Definition(Component\Accordion\AccordionItem\AccordionItem::class)]
   case AccordionItem;
 
+  #[Definition(Component\Breadcrumb\Breadcrumb::class)]
+  case Breadcrumb;
+
   #[Definition(Component\Callout\Callout::class)]
   case Callout;
 
@@ -44,6 +47,20 @@ enum CommonComponents implements ObjectListInterface {
 
   #[Definition(Component\Media\Media::class)]
   case Media;
+
+  #[Definition(Component\Navigation\Navigation::class)]
+  case Navigation;
+
+  #[Definition(Component\SearchForm\SearchForm::class)]
+  case SearchForm;
+  #[Definition(Component\Tabs\Tabs::class)]
+  case Tabs;
+
+  #[Definition(Component\Tabs\TabItem\TabItem::class)]
+  case TabItem;
+
+  #[Definition(Component\Tabs\TabListItem\TabListItem::class)]
+  case TabListItem;
 
   public function templateDirectory(): string {
     return \sprintf('@%s/%s', Twig::NAMESPACE, $this->resolveSubDirectory());

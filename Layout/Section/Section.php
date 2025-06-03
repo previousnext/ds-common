@@ -68,7 +68,7 @@ class Section implements Utility\CommonObjectInterface {
       ->set('isContainer', $this->isContainer)
       ->set('as', $this->as)
       ->set('heading', $this->heading)
-      ->set('content', $this->content->markup)
+      ->set('content', $this->content?->markup)
       ->set('link', $this->link)
       ->set('modifiers', NULL);
   }

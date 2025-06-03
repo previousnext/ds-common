@@ -17,6 +17,9 @@ use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
 
+/**
+ * @method array{'#image': array{'#height': int}} __invoke()
+ */
 #[ObjectType\Slots(slots: [
   'image',
   'icon',

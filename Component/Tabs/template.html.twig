@@ -1,0 +1,29 @@
+<style>
+  input[name="common-tabs"] + div {
+    display: none;
+  }
+  input[name="common-tabs"]:checked + div {
+    display: block;
+  }
+</style>
+<div id="{{ id }}" {{ containerAttributes }} style="border: 2px solid black; padding: 1em;">
+  <div style="background: darkgreen; color: white; padding: .25em; ">
+    <strong>{{ title }}</strong>
+  </div>
+  <div style="border-bottom: 2px solid black; background: #f4f4f4; display: flex; gap: 1em;">
+    {% for i in listItems %}
+      <label for="{{ i['#id'] }}" style="font-size: .75em; background: green; color: white; cursor: pointer">
+        {{ i }}
+      </label>
+    {% endfor %}
+  </div>
+  <div style="padding: .25em;">
+  {% for k, i in items %}
+    <!-- wont work for multiple tabs on a page -->
+    <input type="radio" name="common-tabs" id="{{ i['#id'] }}" style="display: none;" {% if listItems[k]['#active'] %} checked {% endif %} />
+    <div>
+      {{ i }}
+    </div>
+  {% endfor %}
+  </div>
+</div>

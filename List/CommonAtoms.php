@@ -30,6 +30,9 @@ enum CommonAtoms implements ObjectListInterface {
   #[Definition(Atom\Link\Link::class)]
   case Link;
 
+  #[Definition(Atom\LinkedImage\LinkedImage::class)]
+  case LinkedImage;
+
   #[Definition(Atom\Tag\Tag::class)]
   case Tag;
 

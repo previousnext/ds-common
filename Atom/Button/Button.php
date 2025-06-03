@@ -19,6 +19,7 @@ class Button implements Utility\CommonObjectInterface {
     public ButtonType $as,
     public ?string $modifier,
     public bool $disabled,
+    public bool $iconOnly,
     public ?Atom\Icon\Icon $iconStart,
     public ?Atom\Icon\Icon $iconEnd,
   ) {}
@@ -29,6 +30,7 @@ class Button implements Utility\CommonObjectInterface {
     ?string $href = NULL,
     ?string $modifier = NULL,
     bool $disabled = FALSE,
+    bool $iconOnly = FALSE,
     ?Atom\Icon\Icon $iconStart = NULL,
     ?Atom\Icon\Icon $iconEnd = NULL,
   ): static {
@@ -42,6 +44,7 @@ class Button implements Utility\CommonObjectInterface {
       $as,
       $modifier,
       $disabled,
+      $iconOnly,
       $iconStart,
       $iconEnd,
     );

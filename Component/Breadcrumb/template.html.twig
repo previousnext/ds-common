@@ -1,0 +1,8 @@
+<div{{ containerAttributes }}>
+{% for link in links %}
+  {{ link }}
+  {% if not loop.last %}
+    &raquo;
+  {% endif %}
+{% endfor %}
+</div>

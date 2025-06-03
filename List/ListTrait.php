@@ -50,10 +50,10 @@ trait ListTrait {
     $objectClassDir = \dirname($fileName);
     // Determine the directory path part after matching against a namespace/dir.
     $offset = match (TRUE) {
-      \str_contains($objectClassDir, 'Atom/') => \strpos($objectClassDir, 'Atom/'),
-      \str_contains($objectClassDir, 'Component/') => \strpos($objectClassDir, 'Component/'),
-      \str_contains($objectClassDir, 'Layout/') => \strpos($objectClassDir, 'Layout/'),
-      \str_contains($objectClassDir, 'Etc/') => \strpos($objectClassDir, 'Etc/'),
+      ($n = \strpos($objectClassDir, 'Atom/')) !== FALSE => $n,
+      ($n = \strpos($objectClassDir, 'Component/')) !== FALSE => $n,
+      ($n = \strpos($objectClassDir, 'Layout/')) !== FALSE => $n,
+      ($n = \strpos($objectClassDir, 'Etc/')) !== FALSE => $n,
       default => throw new \LogicException(\sprintf('Couldnt resolve %s component.', $definition->className)),
     };
     return \substr(

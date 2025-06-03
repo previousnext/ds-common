@@ -21,8 +21,11 @@ trait ObjectTrait {
   use PintoObject\DrupalObjectTrait;
   use Cache\RefinableCacheableDependencyTrait;
 
+  /**
+   * @phpstan-return array<string, mixed>
+   */
   final public function __invoke(): array {
-    $built = $this->pintoBuild(function (mixed $build): mixed {
+    $built = $this->pintoBuild(function (Slots\Build $build): Slots\Build {
       return $this->build($build);
     });
 
@@ -41,6 +44,9 @@ trait ObjectTrait {
     return $build;
   }
 
+  /**
+   * @phpstan-param array<string, mixed> $built
+   */
   protected function postModifyRenderArray(array &$built): void {}
 
 }

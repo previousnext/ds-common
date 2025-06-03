@@ -28,10 +28,10 @@ class Image implements Component\Media\MediaComponentInterface, Utility\CommonOb
 
   final private function __construct(
     // @todo work out optional args...
-    protected string $source,
-    protected string $altText,
-    protected int $width,
-    protected int $height,
+    public readonly string $source,
+    public readonly string $altText,
+    public readonly int $width,
+    public readonly int $height,
     protected LoadingType $loadingType,
     // @todo sources: as collection
     protected array $sources,
