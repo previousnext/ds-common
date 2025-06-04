@@ -1,0 +1,27 @@
+'#theme': 3a0566f2dd-CommonComponents-Media
+'#attached':
+    library:
+        - pinto/3a0566f2dd-CommonComponents-Media
+'#media':
+    '#theme': 3a0566f2dd-CommonComponents-ExternalVideo
+    '#attached':
+        library:
+            - pinto/3a0566f2dd-CommonComponents-ExternalVideo
+    '#source': 'https://www.youtube.com/watch?v=QrGrOK8oZG8'
+    '#title': 'Too Many Cooks 👨‍🍳'
+    '#duration': 671
+    '#containerAttributes': {  }
+    '#cache':
+        contexts: {  }
+        tags: {  }
+        max-age: -1
+'#caption': 'A video.'
+'#attribution': ~
+'#alignment':
+    name: Center
+'#mediaType': ExternalVideo
+'#containerAttributes': {  }
+'#cache':
+    contexts: {  }
+    tags: {  }
+    max-age: -1
