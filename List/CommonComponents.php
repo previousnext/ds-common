@@ -48,6 +48,9 @@ enum CommonComponents implements ObjectListInterface {
   #[Definition(Component\LinkList\LinkList::class)]
   case LinkList;
 
+  #[Definition(Component\ListItem\ListItem::class)]
+  case ListItem;
+
   #[Definition(Component\Media\Media::class)]
   case Media;
 
