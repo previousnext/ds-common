@@ -10,6 +10,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Pinto\PintoMapping;
 use PreviousNext\Ds\Common\List\CommonLists;
+use PreviousNext\Ds\Common\Vo\Id\Id;
+use PreviousNext\Ds\Mixtape\List\MixtapeLists;
 use PreviousNext\Ds\Nsw\Lists\NswLists;
 use PreviousNext\IdsTools\Command\DumpBuildObjectSnapshots;
 use PreviousNext\IdsTools\DependencyInjection\IdsContainer;
@@ -25,9 +27,10 @@ class SnapshotTest extends TestCase {
     parent::setUp();
     $container = new ContainerBuilder();
     // @todo these should be dynamic.
-    $container->setParameter('ids.design_system', 'nsw');
+    $container->setParameter('ids.design_system', 'mixtape');
     $container->setParameter('ids.design_system.additional', ['common']);
     $container->setParameter('ids.design_systems', [
+      'mixtape' => MixtapeLists::Lists,
       'nsw' => NswLists::Lists,
       'common' => CommonLists::Lists,
     ]);
@@ -36,6 +39,9 @@ class SnapshotTest extends TestCase {
     ]);
     IdsContainer::setupContainer($container);
     $container->compile();
+
+    // Reset IDs.
+    Id::resetGlobalState();
   }
 
   // @todo we should be able to assert that all objects have N>1 test scenarios
@@ -72,11 +78,12 @@ class SnapshotTest extends TestCase {
 
   public static function scenarios(): \Generator {
     $container = new ContainerBuilder();
-    $container->setParameter('ids.design_system', 'nsw');
+    $container->setParameter('ids.design_system', 'mixtape');
     $container->setParameter('ids.design_system.additional', ['common']);
     $container->setParameter('ids.design_systems', [
-      'nsw' => NswLists::Lists,
       'common' => CommonLists::Lists,
+      'mixtape' => MixtapeLists::Lists,
+      'nsw' => NswLists::Lists,
     ]);
     IdsContainer::setupContainer($container);
     $container->compile();
