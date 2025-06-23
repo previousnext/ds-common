@@ -59,7 +59,7 @@ class Masthead implements Utility\CommonObjectInterface {
       ->set('content', $this->content?->markup)
       ->set('containerAttributes', $this->containerAttributes)
       ->set('links', $this->links->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray())
-      ->set('skipLinks', $this->links->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray());
+      ->set('skipLinks', $this->skipLinks->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray());
   }
 
   public function __clone() {

@@ -24,6 +24,8 @@ final class MastheadScenarios {
     $instance->links[] = Link::create('Link 1', $url);
     $instance->links[] = Link::create('Link 2', $url);
     $instance->links[] = Link::create('Link 3', $url);
+    $instance->skipLinks[] = Link::create('Skip Link 1', $url);
+    $instance->skipLinks[] = Link::create('Skip Link 2', $url);
     $instance->containerAttributes['hello'] = 'world';
     $instance->containerAttributes['class'][] = 'foo';
     // @todo add common modifiers?
