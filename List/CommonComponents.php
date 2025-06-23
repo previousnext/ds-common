@@ -66,6 +66,9 @@ enum CommonComponents implements ObjectListInterface {
   #[Definition(Component\SearchForm\SearchForm::class)]
   case SearchForm;
 
+  #[Definition(Component\SideNavigation\SideNavigation::class)]
+  case SideNavigation;
+
   #[Definition(Component\SocialLinks\SocialLinks::class)]
   case SocialLinks;
 
