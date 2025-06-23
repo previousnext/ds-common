@@ -33,6 +33,9 @@ enum CommonLayouts implements ObjectListInterface {
   #[Definition(Layout\Section\Section::class)]
   case Section;
 
+  #[Definition(Layout\Sidebar\Sidebar::class)]
+  case Sidebar;
+
   public function templateDirectory(): string {
     return \sprintf('@%s/%s', Twig::NAMESPACE, $this->resolveSubDirectory());
   }
