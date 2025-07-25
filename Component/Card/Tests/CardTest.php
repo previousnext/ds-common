@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace PreviousNext\Ds\Common\Component\Card\Tests;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use PreviousNext\Ds\Common\Component as CommonComponents;
+use PreviousNext\Ds\Common\Component\Card\Card;
 use PreviousNext\Ds\Common\List\CommonLists;
 use PreviousNext\Ds\Nsw\Lists\NswLists;
 use PreviousNext\IdsTools\DependencyInjection\IdsContainer;
 
+#[CoversClass(Card::class)]
 class CardTest extends TestCase {
 
   protected function setUp(): void {
@@ -26,12 +29,9 @@ class CardTest extends TestCase {
     $container->compile();
   }
 
-  /**
-   * @covers \PreviousNext\Ds\Common\Component\Card\Card
-   */
   public function testCard(): void {
     // @todo switch to a Card Scenario at CardScenarios in the other branch.
-    $card = CommonComponents\Card\Card::create(
+    $card = Card::create(
       image: $image = CommonComponents\Media\Image\Image::createSample(300, 400),
       links: CommonComponents\LinkList\LinkList::create(),
       date: new \DateTimeImmutable('1st January 2001'),
