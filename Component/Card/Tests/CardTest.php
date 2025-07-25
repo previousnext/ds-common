@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Card\Tests;
 
-use Drupal\Core\DependencyInjection\ContainerBuilder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use PreviousNext\Ds\Common\Component as CommonComponents;
 use PreviousNext\Ds\Common\Component\Card\Card;
-use PreviousNext\Ds\Common\List\CommonLists;
-use PreviousNext\Ds\Nsw\Lists\NswLists;
 use PreviousNext\IdsTools\DependencyInjection\IdsContainer;
 
 #[CoversClass(Card::class)]
@@ -18,15 +15,8 @@ class CardTest extends TestCase {
 
   protected function setUp(): void {
     parent::setUp();
-    $container = new ContainerBuilder();
-    $container->setParameter('ids.design_system', 'nsw');
-    $container->setParameter('ids.design_system.additional', ['common']);
-    $container->setParameter('ids.design_systems', [
-      'nsw' => NswLists::Lists,
-      'common' => CommonLists::Lists,
-    ]);
-    IdsContainer::setupContainer($container);
-    $container->compile();
+
+    IdsContainer::testContainerForDs('nswds');
   }
 
   public function testCard(): void {
