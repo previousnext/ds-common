@@ -11,7 +11,7 @@ use PreviousNext\IdsTools\Scenario\Scenario;
 
 final class SocialLinksScenarios {
 
-  #[Scenario(viewPortHeight: 600, viewPortWidth: 1200)]
+  #[Scenario]
   final public static function standard(): CommonComponents\SocialLinks\SocialLinks {
     $url = \Mockery::mock(Url::class);
     $url->expects('toString')->andReturn('http://example.com/');
