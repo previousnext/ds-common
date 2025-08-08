@@ -9,7 +9,7 @@ namespace PreviousNext\Ds\Common\Component\InPageNavigation;
 use PreviousNext\Ds\Common\Atom;
 
 final class InPageNavigationScenarios {
-//
+// This scenario doesn't work in `ids` command yet due to library/chunk problems.
 //  final public static function standard(): InPageNavigation {
 //    /** @var \PreviousNext\Ds\Common\Component\InPageNavigation\InPageNavigation $instance */
 //    $instance = InPageNavigation::create(
