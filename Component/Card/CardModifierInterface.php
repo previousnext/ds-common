@@ -6,6 +6,4 @@ namespace PreviousNext\Ds\Common\Component\Card;
 
 interface CardModifierInterface extends \UnitEnum {
 
-  public function className(): ?string;
-
 }

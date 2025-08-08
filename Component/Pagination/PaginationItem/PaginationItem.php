@@ -20,6 +20,9 @@ class PaginationItem implements Utility\CommonObjectInterface {
   private function __construct(
     public ?Atom\Link\Link $link,
     public bool $ellipsis,
+    /**
+     * @internal
+     */
     public bool $isEnabled,
   ) {
   }
