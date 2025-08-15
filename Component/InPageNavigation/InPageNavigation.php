@@ -44,7 +44,7 @@ class InPageNavigation implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('heading', $this->heading->heading);
+      ->set('heading', $this->heading);
   }
 
 }

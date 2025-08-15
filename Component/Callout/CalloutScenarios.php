@@ -12,7 +12,7 @@ final class CalloutScenarios {
   final public static function callout(): Callout {
     /** @var Callout $instance */
     $instance = Callout::create(
-      CommonAtoms\Heading\Heading::create('Heading!'),
+      CommonAtoms\Heading\Heading::create('Heading!', \PreviousNext\Ds\Common\Atom\Heading\HeadingLevel::Two),
       CommonAtoms\Html\Html::create(Markup::create('<div>Foo <strong>bar</strong></div>')),
     );
     $instance->containerAttributes['foo'] = 'bar';

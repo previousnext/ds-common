@@ -7,7 +7,6 @@ namespace PreviousNext\Ds\Common\Component\SocialLinks;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
-use PreviousNext\Ds\Common\Atom\Heading\Heading;
 use PreviousNext\Ds\Common\Component\SocialLinks\SocialLink\SocialLink;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
@@ -26,7 +25,7 @@ class SocialLinks extends AbstractSet implements Utility\CommonObjectInterface {
   use Utility\ObjectTrait;
 
   private function __construct(
-    protected Heading $title,
+    protected Atom\Heading\Heading $title,
   ) {
     parent::__construct();
   }
@@ -39,13 +38,13 @@ class SocialLinks extends AbstractSet implements Utility\CommonObjectInterface {
     string $title,
   ): static {
     return static::factoryCreate(
-      Heading::create($title),
+      Atom\Heading\Heading::create($title, Atom\Heading\HeadingLevel::Two),
     );
   }
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('heading', $this->title->heading)
+      ->set('heading', $this->title)
       ->set('items', $this->map(static fn (SocialLink $item): mixed => $item())->toArray());
   }
 

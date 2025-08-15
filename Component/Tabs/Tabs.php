@@ -7,7 +7,8 @@ namespace PreviousNext\Ds\Common\Component\Tabs;
 use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
-use PreviousNext\Ds\Common\Atom\Heading\Heading;
+use PreviousNext\Ds\Common\Atom;
+use PreviousNext\Ds\Common\Atom\Heading\HeadingLevel;
 use PreviousNext\Ds\Common\Component\Tabs\TabItem\TabItem;
 use PreviousNext\Ds\Common\Component\Tabs\TabListItem\TabListItem;
 use PreviousNext\Ds\Common\Utility;
@@ -30,7 +31,7 @@ class Tabs extends AbstractSet implements Utility\CommonObjectInterface {
   use Utility\ObjectTrait;
 
   private function __construct(
-    protected Heading $title,
+    protected Atom\Heading\Heading $title,
     public Attribute $containerAttributes,
     protected ?Tab $active = NULL,
     protected readonly ?string $id = NULL,
@@ -47,7 +48,7 @@ class Tabs extends AbstractSet implements Utility\CommonObjectInterface {
     ?string $id = NULL,
   ): static {
     return static::factoryCreate(
-      Heading::create($title),
+      Atom\Heading\Heading::create($title, HeadingLevel::Two),
       containerAttributes: new Attribute(),
       id: $id,
     );
@@ -69,7 +70,7 @@ class Tabs extends AbstractSet implements Utility\CommonObjectInterface {
 
     return $build
       ->set('id', $this->id)
-      ->set('title', $this->title->heading)
+      ->set('title', $this->title)
       ->set('listItems', \array_column($tabs, 0))
       ->set('items', \array_column($tabs, 1));
   }

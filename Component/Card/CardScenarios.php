@@ -22,7 +22,7 @@ final class CardScenarios {
         CommonAtoms\Link\Link::create(title: '', url: $url),
       ]),
       date: new \DateTimeImmutable('1 October 2020'),
-      heading: Atom\Heading\Heading::create('Example!'),
+      heading: Atom\Heading\Heading::create('Example!', \PreviousNext\Ds\Common\Atom\Heading\HeadingLevel::Two),
     );
     return $instance;
   }

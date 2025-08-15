@@ -7,7 +7,7 @@ use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Component as CommonComponents;
 
 $callout = CommonComponents\Callout\Callout::create(
-  Atom\Heading\Heading::create('Heading!'),
+  Atom\Heading\Heading::create('Heading!',\PreviousNext\Ds\Common\Atom\Heading\HeadingLevel::Two),
   Atom\Html\Html::create(Markup::create('<div>Foo <strong>bar</strong></div>')),
 );
 

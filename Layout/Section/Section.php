@@ -54,7 +54,7 @@ class Section implements Utility\CommonObjectInterface {
       as: $as,
       isContainer: $isContainer,
       background: $background,
-      heading: $heading !== NULL ? Atom\Heading\Heading::create($heading) : NULL,
+      heading: $heading !== NULL ? Atom\Heading\Heading::create($heading, \PreviousNext\Ds\Common\Atom\Heading\HeadingLevel::Two) : NULL,
       content: $content,
       link: $link,
       modifiers: new Modifier\ModifierBag(SectionModifierInterface::class),

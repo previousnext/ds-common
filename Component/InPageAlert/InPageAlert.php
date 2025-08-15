@@ -45,7 +45,7 @@ class InPageAlert implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('heading', $this->heading->heading)
+      ->set('heading', $this->heading)
       ->set('type', $this->type->name)
       ->set('content', $this->content->markup)
       // @todo
