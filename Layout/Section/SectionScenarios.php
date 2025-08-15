@@ -29,4 +29,16 @@ final class SectionScenarios {
     return $instance;
   }
 
+  final public static function sectionIsContainer(): \Generator {
+    foreach ([TRUE, FALSE] as $isContainer) {
+      $instance = Section::create(
+        heading: 'Section title',
+        as: SectionType::Section,
+        content: Atom\Html\Html::create(Markup::create('<div>Section <strong>contents</strong></div>')),
+        isContainer: $isContainer,
+      );
+      yield ($isContainer ? 'is-container' : 'not-container') => $instance;
+    }
+  }
+
 }
