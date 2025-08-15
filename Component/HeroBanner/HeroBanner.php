@@ -20,7 +20,7 @@ class HeroBanner implements Utility\CommonObjectInterface {
    * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<HeroBannerModifierInterface> $modifiers
    */
   final private function __construct(
-    public string $title,
+    public Atom\Heading\Heading $title,
     public string $subtitle,
     public ?Atom\Link\Link $link,
     public ?Component\Media\Image\Image $image,
@@ -43,11 +43,11 @@ class HeroBanner implements Utility\CommonObjectInterface {
     }
 
     return static::factoryCreate(
-      $title,
-      $subtitle,
-      $link,
-      $image,
-      $links,
+      title: Atom\Heading\Heading::create($title, Atom\Heading\HeadingLevel::One),
+      subtitle: $subtitle,
+      link: $link,
+      image: $image,
+      links: $links,
       highlight: TRUE,
       modifiers: new Modifier\ModifierBag(HeroBannerModifierInterface::class),
       containerAttributes: new Attribute(),
