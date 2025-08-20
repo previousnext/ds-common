@@ -11,6 +11,7 @@ use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Utility;
+use PreviousNext\IdsTools\ImageGeneration\PicsumImageGenerator;
 
 #[ObjectType\Slots(slots: [
   'source',
@@ -25,6 +26,11 @@ use PreviousNext\Ds\Common\Utility;
 class Image implements Component\Media\MediaComponentInterface, Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
+
+  /**
+   * @var class-string<\PreviousNext\IdsTools\ImageGeneration\ImageGenerationInterface>
+   */
+  private static $imageGenerator = PicsumImageGenerator::class;
 
   final private function __construct(
     // @todo work out optional args...
@@ -63,11 +69,10 @@ class Image implements Component\Media\MediaComponentInterface, Utility\CommonOb
   }
 
   public static function createSample(int $width, int $height): static {
+    $url = self::$imageGenerator::createSample($width, $height);
     return static::create(
-      // The date here is just a seed, we need it to be stable.
-      // @todo change it to something other than some date.
-      \sprintf('https://picsum.photos/seed/2025-06-04/%d/%d', $width, $height),
-      'Picsum Sample',
+      $url,
+      'Sample',
       $width,
       $height,
     );
@@ -104,6 +109,13 @@ class Image implements Component\Media\MediaComponentInterface, Utility\CommonOb
 
   protected static function fileUrlGenerator(): FileUrlGeneratorInterface {
     return \Drupal::service(FileUrlGeneratorInterface::class);
+  }
+
+  /**
+   * @phpstan-param class-string<\PreviousNext\IdsTools\ImageGeneration\ImageGenerationInterface> $imageGenerator
+   */
+  public static function setImageGenerator(string $imageGenerator): void {
+    self::$imageGenerator = $imageGenerator;
   }
 
 }
