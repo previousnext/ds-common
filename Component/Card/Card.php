@@ -100,11 +100,6 @@ class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
   }
 
   protected function build(Slots\Build $build): Slots\Build {
-    // This is built in Common since there is a shared benefit from
-    // functionality of a common interface.
-    foreach ($this->modifiers as $modifier) {
-      $this->containerAttributes->addClass($modifier->className());
-    }
     return $build
       ->set('containerAttributes', $this->containerAttributes);
   }
