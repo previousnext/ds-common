@@ -14,6 +14,7 @@ use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
 use PreviousNext\Ds\Common\Utility\ObjectTrait;
 use PreviousNext\Ds\Common\Vo\MenuTree\MenuTrees;
 use PreviousNext\IdsTools\Scenario\Scenarios;
+use Ramsey\Collection\Collection;
 
 #[Scenarios([FooterScenarios::class])]
 #[\Pinto\Attribute\ObjectType\Slots(slots: [
@@ -35,10 +36,11 @@ class Footer implements CommonObjectInterface {
    *
    * A description can be an Acknowledgment of Country (AOC), Slogan, or other short one-line blurb.
    *
+   * @phpstan-param iterable<LinkedImage> $logos
    * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<\PreviousNext\Ds\Common\Layout\Footer\FooterModifierInterface> $modifiers
    */
   final private function __construct(
-    public readonly LinkedImage $logo,
+    public readonly iterable $logos,
     protected readonly ?string $description,
     protected readonly ?string $copyright,
     protected MenuTrees $menu,
@@ -49,16 +51,22 @@ class Footer implements CommonObjectInterface {
   ) {
   }
 
+  /**
+   * @phpstan-param \PreviousNext\Ds\Common\Atom\LinkedImage\LinkedImage|iterable<\PreviousNext\Ds\Common\Atom\LinkedImage\LinkedImage>|null $logos
+   */
   public static function create(
-    LinkedImage $logo,
+    LinkedImage|iterable|null $logos = NULL,
     ?string $description = NULL,
     ?string $copyright = NULL,
     ?MenuTrees $menu = NULL,
     ?SocialLinks $socialLinks = NULL,
     ?Atom\Link\Links $links = NULL,
   ): static {
+    $logos ??= [];
+    // Collection class validates types in the broad iterable.
+    $logos = new Collection(LinkedImage::class, \iterator_to_array($logos instanceof LinkedImage ? [$logos] : $logos));
     return static::factoryCreate(
-      logo: $logo,
+      logos: $logos,
       description: $description,
       copyright: $copyright,
       links: $links ?? new Atom\Link\Links(),

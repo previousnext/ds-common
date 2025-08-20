@@ -36,7 +36,7 @@ final class FooterScenarios {
     $links[] = CommonAtoms\Link\Link::create('Accessibility', $url);
 
     $instance = Footer::create(
-      logo: CommonAtoms\LinkedImage\LinkedImage::create(
+      logos: CommonAtoms\LinkedImage\LinkedImage::create(
         CommonComponents\Media\Image\Image::createSample(120, 49),
         CommonAtoms\Link\Link::create('LinkedImageText!', $url),
       ),
@@ -76,7 +76,7 @@ final class FooterScenarios {
     $links[] = CommonAtoms\Link\Link::create('Accessibility', $url);
 
     $instance = Footer::create(
-      logo: CommonAtoms\LinkedImage\LinkedImage::create(
+      logos: CommonAtoms\LinkedImage\LinkedImage::create(
         CommonComponents\Media\Image\Image::createSample(120, 49),
         CommonAtoms\Link\Link::create('LinkedImageText!', $url),
       ),
@@ -99,7 +99,7 @@ final class FooterScenarios {
     $links[] = CommonAtoms\Link\Link::create('Accessibility', $url);
 
     $instance = Footer::create(
-      logo: CommonAtoms\LinkedImage\LinkedImage::create(
+      logos: CommonAtoms\LinkedImage\LinkedImage::create(
         CommonComponents\Media\Image\Image::createSample(120, 49),
         CommonAtoms\Link\Link::create('LinkedImageText!', $url),
       ),
@@ -136,7 +136,7 @@ final class FooterScenarios {
 
     $socialLinks = CommonComponents\SocialLinks\SocialLinks::create('Social media links');
     $instance = Footer::create(
-      logo: CommonAtoms\LinkedImage\LinkedImage::create(
+      logos: CommonAtoms\LinkedImage\LinkedImage::create(
         CommonComponents\Media\Image\Image::createSample(120, 49),
         CommonAtoms\Link\Link::create('LinkedImageText!', $url),
       ),
