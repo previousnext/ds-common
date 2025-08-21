@@ -14,7 +14,7 @@ final class LinkListScenarios {
     $url->expects('toString')->andReturn('http://example.com/');
 
     $instance = LinkList::create([]);
-    $instance[] = Atom\Link\Link::create(title: '', url: $url);
+    $instance[] = Atom\Link\Link::create(title: 'Link!', url: $url);
     $instance[] = Atom\Link\Link::create('Front page!', $url);
     return $instance;
   }

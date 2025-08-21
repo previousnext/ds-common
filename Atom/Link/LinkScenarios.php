@@ -29,9 +29,7 @@ final class LinkScenarios {
   final public static function linkDownload(): Link {
     $url = \Mockery::mock(Url::class);
     $url->expects('toString')->andReturn('http://example.com/');
-    $l = Link::create('Example', $url, download: TRUE);
-    $k = 1;
-    return $l;
+    return Link::create('Example', $url, download: TRUE);
   }
 
 }
