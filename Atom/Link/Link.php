@@ -9,12 +9,16 @@ use Drupal\Core\Url;
 use PreviousNext\Ds\Common\Atom\Icon\Icon;
 use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
 use PreviousNext\Ds\Common\Utility\ObjectTrait;
+use PreviousNext\IdsTools\Scenario\Scenarios;
 
+#[Scenarios(scenarios: [
+  LinkScenarios::class,
+])]
 class Link implements CommonObjectInterface {
 
   use ObjectTrait;
 
-  private function __construct(
+  final private function __construct(
     public string $title,
     public string $href,
     public bool $more,
@@ -23,7 +27,7 @@ class Link implements CommonObjectInterface {
     public bool $download,
     public ?Icon $iconStart,
     public ?Icon $iconEnd,
-    public Attribute $attributes = new Attribute(),
+    public Attribute $attributes,
   ) {
   }
 
@@ -37,15 +41,16 @@ class Link implements CommonObjectInterface {
     ?Icon $iconStart = NULL,
     ?Icon $iconEnd = NULL,
   ): static {
-    return new static(
-      $title,
-      $url->toString(),
-      $more,
-      $external,
-      $current,
-      $download,
-      $iconStart,
-      $iconEnd,
+    return static::factoryCreate(
+      title: $title,
+      href: $url->toString(),
+      more: $more,
+      external: $external,
+      current: $current,
+      download: $download,
+      iconStart: $iconStart,
+      iconEnd: $iconEnd,
+      attributes: new Attribute(),
     );
   }
 

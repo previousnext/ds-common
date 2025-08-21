@@ -1,13 +1,6 @@
-{% set baseClass = 'mx-link' %}
-{% set classes = [
-  baseClass,
-  more ? baseClass~'--more' : null,
-  external ? baseClass~'--external' : null,
-  download ? baseClass~'--download' : null,
-] %}
 {% set attributes = (attributes ?? create_attribute()).addClass(classes) %}
-
-<a{{ attributes }} href="{{ href }}"{% if current %} aria-current="page"{% endif %}>
+Common Link
+<a{{ attributes }} href="{{ href }}">
   {{ iconStart }}
   <span>{{ title }}</span>
   {{ iconEnd }}
