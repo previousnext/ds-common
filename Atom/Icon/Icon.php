@@ -9,7 +9,7 @@ use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
 use PreviousNext\Ds\Common\Utility\ObjectTrait;
 
-class Icon implements CommonObjectInterface {
+class Icon implements CommonObjectInterface, IconInterface {
 
   use ObjectTrait;
 

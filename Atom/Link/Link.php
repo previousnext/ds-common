@@ -6,7 +6,9 @@ namespace PreviousNext\Ds\Common\Atom\Link;
 
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
-use PreviousNext\Ds\Common\Atom\Icon\Icon;
+use Pinto\Slots;
+use PreviousNext\Ds\Common\Atom\DefaultInstance;
+use PreviousNext\Ds\Common\Atom\Icon\IconInterface;
 use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
 use PreviousNext\Ds\Common\Utility\ObjectTrait;
 use PreviousNext\IdsTools\Scenario\Scenarios;
@@ -14,7 +16,7 @@ use PreviousNext\IdsTools\Scenario\Scenarios;
 #[Scenarios(scenarios: [
   LinkScenarios::class,
 ])]
-class Link implements CommonObjectInterface {
+class Link implements CommonObjectInterface, LinkInterface {
 
   use ObjectTrait;
 
@@ -25,8 +27,8 @@ class Link implements CommonObjectInterface {
     public bool $external,
     public bool $current,
     public bool $download,
-    public ?Icon $iconStart,
-    public ?Icon $iconEnd,
+    public IconInterface $iconStart,
+    public IconInterface $iconEnd,
     public Attribute $attributes,
   ) {
   }
@@ -38,8 +40,8 @@ class Link implements CommonObjectInterface {
     bool $external = FALSE,
     bool $current = FALSE,
     bool $download = FALSE,
-    ?Icon $iconStart = NULL,
-    ?Icon $iconEnd = NULL,
+    IconInterface $iconStart = new DefaultInstance(),
+    IconInterface $iconEnd = new DefaultInstance(),
   ): static {
     return static::factoryCreate(
       title: $title,
@@ -52,6 +54,12 @@ class Link implements CommonObjectInterface {
       iconEnd: $iconEnd,
       attributes: new Attribute(),
     );
+  }
+
+  protected function build(Slots\Build $build): Slots\Build {
+    return $build
+      ->set('iconStart', $this->iconStart instanceof self ? $this->iconStart : NULL)
+      ->set('iconEnd', $this->iconEnd instanceof self ? $this->iconEnd : NULL);
   }
 
 }
