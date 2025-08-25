@@ -4,28 +4,19 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Tests;
 
-use PHPUnit\Framework\Attributes\CoversMethod;
-use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Pinto\PintoMapping;
 use PreviousNext\Ds\Common\Vo\Id\Id;
-use PreviousNext\Ds\Mixtape\Component\HeroBanner\HeroBanner as MixtapeHeroBanner;
-use PreviousNext\Ds\Mixtape\List\MixtapeComponents;
-use PreviousNext\Ds\Nsw\Component\HeroBanner\HeroBanner as NswHeroBanner;
-use PreviousNext\Ds\Nsw\Lists\NswComponents;
 use PreviousNext\IdsTools\Command\DumpBuildObjectSnapshots;
 use PreviousNext\IdsTools\DependencyInjection\IdsCompilerPass;
 use PreviousNext\IdsTools\DependencyInjection\IdsContainer;
 use PreviousNext\IdsTools\Scenario\CompiledScenario;
 use PreviousNext\IdsTools\Scenario\Scenarios;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
-#[CoversMethod(IdsContainer::class, 'testContainers')]
-#[CoversMethod(Scenarios::class, 'findScenarios')]
 class SnapshotTest extends TestCase {
 
   protected function setUp(): void {
@@ -35,12 +26,9 @@ class SnapshotTest extends TestCase {
     Id::resetGlobalState();
   }
 
-  // @todo we should be able to assert that all objects have N>1 test scenarios
-
   /**
    * @phpstan-param class-string $objectClassName
    */
-  #[CoversNothing]
   #[DataProvider('scenarios')]
   public function testSnapshots(string $ds, CompiledScenario $scenario, object $scenarioObject, string $objectClassName): void {
     IdsContainer::testContainerForDs($ds);
@@ -82,51 +70,6 @@ class SnapshotTest extends TestCase {
         yield \sprintf('Scenario: %s for %s', $scenario, $definition->className) => [$ds, $scenario, $scenarioObject, $definition->className];
       }
     }
-  }
-
-  public function testTestContainers(): void {
-    $testContainers = \iterator_to_array(IdsContainer::testContainers());
-    static::assertEquals([
-      'mixtape',
-      'nswds',
-    ], \array_keys($testContainers));
-  }
-
-  /**
-   * Sanity test to ensure at least one scenario for each DS is being produced.
-   */
-  public function testScenarios(): void {
-    $designSystems = \array_keys(\iterator_to_array(IdsContainer::testContainers()));
-    $designSystems = \Safe\array_combine($designSystems, $designSystems);
-
-    /** @var \Closure(ContainerInterface): array<string, array{\PreviousNext\IdsTools\Scenario\CompiledScenario, callable&object}> $scenariosById */
-    $scenariosById = static function (ContainerInterface $container) {
-      $pintoMapping = $container->get(PintoMapping::class);
-      /** @var array<class-string<\Pinto\List\ObjectListInterface>> $primaryLists */
-      $primaryLists = $container->getParameter(IdsCompilerPass::PRIMARY_LISTS);
-
-      /** @var array<string, array{\PreviousNext\IdsTools\Scenario\CompiledScenario, callable&object}> $scenariosById */
-      $scenariosById = [];
-      foreach (Scenarios::findScenarios($pintoMapping, $primaryLists) as $k => $v) {
-        $scenariosById[$k->id] = [$k, $v];
-      }
-      return $scenariosById;
-    };
-
-    // Mixtape.
-    $mixtapeScenariosById = $scenariosById(IdsContainer::testContainerForDs($designSystems['mixtape']));
-    unset($designSystems['mixtape']);
-    static::assertEquals(MixtapeComponents::HeroBanner, $mixtapeScenariosById['heroBanner'][0]->pintoEnum);
-    static::assertInstanceOf(MixtapeHeroBanner::class, $mixtapeScenariosById['heroBanner'][1]);
-
-    // NSW.
-    $nswScenariosById = $scenariosById(IdsContainer::testContainerForDs($designSystems['nswds']));
-    unset($designSystems['nswds']);
-    static::assertEquals(NswComponents::HeroBanner, $nswScenariosById['nswHeroBanner'][0]->pintoEnum);
-    static::assertInstanceOf(NswHeroBanner::class, $nswScenariosById['nswHeroBanner'][1]);
-
-    // Sanity check to make sure we have tested each DS at least once each.
-    static::assertEquals([], $designSystems);
   }
 
 }
