@@ -13,6 +13,9 @@ use PreviousNext\IdsTools\DependencyInjection\IdsCompilerPass;
 use PreviousNext\IdsTools\DependencyInjection\IdsContainer;
 use PreviousNext\IdsTools\Scenario\CompiledScenario;
 use PreviousNext\IdsTools\Scenario\Scenarios;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
@@ -24,6 +27,30 @@ class SnapshotTest extends TestCase {
 
     // Reset IDs.
     Id::resetGlobalState();
+  }
+
+  /**
+   * Tests scenarios complete, also adds coverage data.
+   */
+  #[DataProvider('containers')]
+  public function testScenarioGeneration(ContainerInterface $container): void {
+    \Drupal::setContainer($container);
+
+    /** @var \PreviousNext\IdsTools\Command\DumpBuildObjectSnapshots $command */
+    $command = $container->get(DumpBuildObjectSnapshots::class);
+    $commandTester = new CommandTester($command);
+    static::assertEquals(Command::SUCCESS, $commandTester->execute([
+      // Set dry run otherwise all fixtures will be written to disk and subsequent `testSnapshots` test will fail
+      // erroneously.
+      '--dry-run' => TRUE,
+    ]));
+    static::assertStringContainsString('This is a dry run.', $commandTester->getDisplay(TRUE));
+  }
+
+  public static function containers(): \Generator {
+    foreach (IdsContainer::testContainers() as $ds => $container) {
+      yield $ds => [$container];
+    }
   }
 
   /**
