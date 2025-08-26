@@ -25,8 +25,6 @@ class CardTest extends TestCase {
       image: $image = CommonComponents\Media\Image\Image::createSample(300, 400),
       links: CommonComponents\LinkList\LinkList::create(),
       date: new \DateTimeImmutable('1st January 2001'),
-      // @todo replace with real modifiers
-      modifiers: [CommonComponents\Card\CommonCardModifiers::Modifier1],
     );
 
     $image->imageAttributes['test'] = 'image-attr';

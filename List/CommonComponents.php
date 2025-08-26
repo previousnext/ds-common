@@ -87,6 +87,9 @@ enum CommonComponents implements ObjectListInterface {
   #[Definition(Component\Tabs\TabListItem\TabListItem::class)]
   case TabListItem;
 
+  #[Definition(Component\Tags\Tags::class)]
+  case Tags;
+
   public function templateDirectory(): string {
     return \sprintf('@%s/%s', Twig::NAMESPACE, $this->resolveSubDirectory());
   }

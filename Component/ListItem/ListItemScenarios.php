@@ -99,10 +99,10 @@ final class ListItemScenarios {
       label: <<<MARKUP
         Resource
         MARKUP,
-      tags: new Atom\Tag\Tags([
-        Atom\Tag\Tag::create('Tag 1'),
-        Atom\Tag\Tag::create('Tag 2'),
-        Atom\Tag\Tag::create('Tag 3'),
+      tags: CommonComponents\Tags\Tags::create([
+        CommonComponents\Tags\Tag::create('Tag 1'),
+        CommonComponents\Tags\Tag::create('Tag 2'),
+        CommonComponents\Tags\Tag::create('Tag 3'),
       ]),
     );
     return $instance;
@@ -147,10 +147,10 @@ final class ListItemScenarios {
     $instance = ListItem::create(
       link: Atom\Link\Link::create('Link 1', $url),
       image: CommonComponents\Media\Image\Image::createSample(120, 49),
-      tags: new Atom\Tag\Tags([
-        Atom\Tag\Tag::create('Tag 1'),
-        Atom\Tag\Tag::create('Tag 2'),
-        Atom\Tag\Tag::create('Tag 3'),
+      tags: CommonComponents\Tags\Tags::create([
+        CommonComponents\Tags\Tag::create('Tag 1'),
+        CommonComponents\Tags\Tag::create('Tag 2'),
+        CommonComponents\Tags\Tag::create('Tag 3'),
       ]),
       content: Atom\Html\Html::create(Markup::create(<<<MARKUP
         Welcome to the <strong>Jungle</strong> 🎸

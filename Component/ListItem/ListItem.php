@@ -28,7 +28,7 @@ class ListItem implements Utility\CommonObjectInterface {
   final private function __construct(
     public Atom\Link\Link $link,
     public ?Component\Media\Image\Image $image,
-    public Atom\Tag\Tags $tags,
+    public Component\Tags\Tags $tags,
     public ?Atom\Html\Html $content,
     public ?string $label,
     public ?string $info,
@@ -41,7 +41,7 @@ class ListItem implements Utility\CommonObjectInterface {
   public static function create(
     Atom\Link\Link $link,
     ?Component\Media\Image\Image $image = NULL,
-    ?Atom\Tag\Tags $tags = NULL,
+    ?Component\Tags\Tags $tags = NULL,
     ?Atom\Html\Html $content = NULL,
     ?string $label = NULL,
     ?string $info = NULL,
@@ -50,7 +50,7 @@ class ListItem implements Utility\CommonObjectInterface {
     return static::factoryCreate(
       link: $link,
       image: $image,
-      tags: $tags ?? new Atom\Tag\Tags(),
+      tags: $tags ?? Component\Tags\Tags::create(),
       content: $content,
       label: $label,
       info: $info,

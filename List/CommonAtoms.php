@@ -33,9 +33,6 @@ enum CommonAtoms implements ObjectListInterface {
   #[Definition(Atom\LinkedImage\LinkedImage::class)]
   case LinkedImage;
 
-  #[Definition(Atom\Tag\Tag::class)]
-  case Tag;
-
   public function templateDirectory(): string {
     return \sprintf('@%s/%s', Twig::NAMESPACE, $this->resolveSubDirectory());
   }

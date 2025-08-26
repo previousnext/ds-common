@@ -45,7 +45,7 @@ class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
     public ?Atom\Icon\Icon $icon,
     public ?\DateTimeInterface $date,
     public CommonComponents\LinkList\LinkList $links,
-    public Atom\Tag\Tags $tags,
+    public CommonComponents\Tags\Tags $tags,
     public ?Atom\Heading\Heading $heading,
     public ?Atom\Html\Html $content,
     public ?Atom\Link\Link $link,
@@ -58,23 +58,21 @@ class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
     ?CommonComponents\LinkList\LinkList $links,
     ?\DateTimeInterface $date = NULL,
     ?Atom\Icon\Icon $icon = NULL,
-    ?Atom\Tag\Tags $tags = NULL,
+    ?CommonComponents\Tags\Tags $tags = NULL,
     ?Atom\Heading\Heading $heading = NULL,
     ?Atom\Html\Html $content = NULL,
     ?Atom\Link\Link $link = NULL,
-    ?iterable $modifiers = [],
   ): static {
-    $modifierBag = new Modifier\ModifierBag(CardModifierInterface::class, \iterator_to_array($modifiers));
     return static::factoryCreate(
       image: $image,
       icon: $icon,
       date: $date,
       links: $links ?? CommonComponents\LinkList\LinkList::create(),
-      tags: $tags ?? new Atom\Tag\Tags(),
+      tags: $tags ?? CommonComponents\Tags\Tags::create(),
       heading: $heading,
       content: $content,
       link: $link,
-      modifiers: $modifierBag,
+      modifiers: new Modifier\ModifierBag(CardModifierInterface::class),
       containerAttributes: new Attribute(),
     );
   }
@@ -89,7 +87,7 @@ class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
       // @todo handle Tags.
       links: CommonComponents\LinkList\LinkList::fromLinks($data->getLinks()),
       // @todo handle Icon.
-      tags: new Atom\Tag\Tags(),
+      tags: CommonComponents\Tags\Tags::create(),
       // @todo heading.
       heading: NULL,
       // @todo content.
