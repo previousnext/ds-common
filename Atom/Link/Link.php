@@ -8,6 +8,7 @@ use Drupal\Core\Template\Attribute;
 use Drupal\Core\Url;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom\DefaultInstance;
+use PreviousNext\Ds\Common\Atom\Icon\Icon;
 use PreviousNext\Ds\Common\Atom\Icon\IconInterface;
 use PreviousNext\Ds\Common\Utility\CommonObjectInterface;
 use PreviousNext\Ds\Common\Utility\ObjectTrait;
@@ -58,8 +59,8 @@ class Link implements CommonObjectInterface, LinkInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('iconStart', $this->iconStart instanceof self ? $this->iconStart : NULL)
-      ->set('iconEnd', $this->iconEnd instanceof self ? $this->iconEnd : NULL);
+      ->set('iconStart', $this->iconStart instanceof Icon ? $this->iconStart : NULL)
+      ->set('iconEnd', $this->iconEnd instanceof Icon ? $this->iconEnd : NULL);
   }
 
 }

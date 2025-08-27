@@ -151,15 +151,26 @@ final class FooterScenarios {
       $fbIcon->modifiers[] = Icons::Facebook;
       $fbIcon->modifiers[] = IconSize::Medium;
     }
+    if ($instance instanceof \PreviousNext\Ds\Nsw\Layout\Footer\Footer) {
+      $fbIcon->icon = 'rocket';
+    }
+
     $igIcon = CommonAtoms\Icon\Icon::create();
     if ($instance instanceof \PreviousNext\Ds\Mixtape\Layout\Footer\Footer) {
       $igIcon->modifiers[] = Icons::Instagram;
       $igIcon->modifiers[] = IconSize::Medium;
     }
+    if ($instance instanceof \PreviousNext\Ds\Nsw\Layout\Footer\Footer) {
+      $igIcon->icon = 'keyboard_command_key';
+    }
+
     $liIcon = CommonAtoms\Icon\Icon::create();
     if ($instance instanceof \PreviousNext\Ds\Mixtape\Layout\Footer\Footer) {
       $liIcon->modifiers[] = Icons::Linkedin;
       $liIcon->modifiers[] = IconSize::Medium;
+    }
+    if ($instance instanceof \PreviousNext\Ds\Nsw\Layout\Footer\Footer) {
+      $liIcon->icon = 'star';
     }
 
     $socialLinks[] = CommonAtoms\Link\Link::create('Facebook', $url, iconStart: $fbIcon);
