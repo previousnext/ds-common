@@ -7,7 +7,7 @@ namespace PreviousNext\Ds\Common\Modifier;
 use Ramsey\Collection\Set;
 
 /**
- * Represents a collection of enums.
+ * Represents a collection of enums or objects.
  *
  * - Enums are unique per bag.
  * - There are no unique configuration associated with an enum, other than
@@ -49,7 +49,7 @@ final class ModifierBag extends Set {
    *
    * @phpstan-param class-string<R> $classString
    * @phpstan-return static<R>
-   * @template R of class-string<\PreviousNext\Ds\Common\Component\HeroBanner\HeroBannerModifierInterface>
+   * @template R
    */
   public function getInstancesOf(string $classString): ModifierBag {
     /** @var static<R> */
@@ -58,6 +58,9 @@ final class ModifierBag extends Set {
     });
   }
 
+  /**
+   * @phpstan-param mixed $value
+   */
   public function offsetSet(mixed $offset, mixed $value): void {
     if ($value instanceof \UnitEnum) {
       // Is the enum being added mutually exclusive (doesn't allow another enum

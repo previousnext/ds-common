@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Card;
 
-interface CardModifierInterface extends \UnitEnum {
+interface CardModifierInterface {
 
 }
