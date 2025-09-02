@@ -56,7 +56,7 @@ class GridItem implements Utility\CommonObjectInterface {
   protected function build(Slots\Build $build): Slots\Build {
     return $build
       // Remove HTML hard case.
-      ->set('item', $this->item instanceof Atom\Html\Html ? $this->item->markup : $this->item)
+      ->set('item', [$this->item instanceof Atom\Html\Html ? $this->item->markup : $this->item])
       ->set('isContainer', $this->isContainer)
       ->set('as', $this->as)
       ->set('modifiers', NULL);
