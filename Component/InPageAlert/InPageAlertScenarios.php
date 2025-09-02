@@ -19,7 +19,7 @@ final class InPageAlertScenarios {
       CommonAtoms\Heading\Heading::create('Heading!', \PreviousNext\Ds\Common\Atom\Heading\HeadingLevel::Two),
       Type::Success,
       CommonAtoms\Html\Html::create(Markup::create('<div>Foo <strong>bar</strong></div>')),
-      CommonAtoms\Link\Link::create(title: '', url: $url),
+      CommonAtoms\Link\Link::create(title: 'A link!', url: $url),
     );
     return $instance;
   }
