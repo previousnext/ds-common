@@ -33,10 +33,10 @@ class Grid extends AbstractCollection implements Utility\CommonObjectInterface {
    * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<GridModifierInterface> $modifiers
    */
   final private function __construct(
-    protected GridType $as,
+    public GridType $as,
     public Modifier\ModifierBag $modifiers,
     public Attribute $containerAttributes,
-    private GridItem\GridItemType $gridItemDefaultType,
+    public GridItem\GridItemType $gridItemDefaultType,
   ) {
     parent::__construct();
   }
@@ -64,13 +64,15 @@ class Grid extends AbstractCollection implements Utility\CommonObjectInterface {
       ->set('as', NULL);
   }
 
+  /**
+   * @phpstan-param mixed $value
+   */
   public function offsetSet(mixed $offset, mixed $value): void {
     if (!$value instanceof GridItem\GridItem) {
+      $item = $value;
       // Wrap everything in a GridItem:
-      $value = GridItem\GridItem::create(
-        item: $value,
-        as: $this->gridItemDefaultType,
-      );
+      $value = GridItem\GridItem::create(as: $this->gridItemDefaultType);
+      $value[] = $item;
     }
 
     parent::offsetSet($offset, $value);

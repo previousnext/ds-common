@@ -7,18 +7,21 @@ namespace PreviousNext\Ds\Common\Layout\Grid\GridItem;
 use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
-use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
+use Ramsey\Collection\AbstractCollection;
 
+/**
+ * @extends \Ramsey\Collection\AbstractCollection<mixed>
+ */
 #[ObjectType\Slots(slots: [
-  'item',
+  'content',
   'isContainer',
   'modifiers',
   'as',
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
-class GridItem implements Utility\CommonObjectInterface {
+class GridItem extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
@@ -26,26 +29,19 @@ class GridItem implements Utility\CommonObjectInterface {
    * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<\PreviousNext\Ds\Common\Layout\Grid\GridModifierInterface> $modifiers
    */
   final private function __construct(
-    // Should this accept anything? auto-exec objs?
-    // protected Atom\Html\Html $item,.
-    protected mixed $item,
     protected GridItemType $as,
     protected bool $isContainer,
     public Modifier\ModifierBag $modifiers,
     public Attribute $containerAttributes,
-  ) {}
+  ) {
+    parent::__construct();
+  }
 
-  /**
-   * @phpstan-param array<object|array<string, mixed>> $item
-   */
   public static function create(
-    // Atom\Html\Html $item,.
-    mixed $item,
     GridItemType $as,
     bool $isContainer = TRUE,
   ): static {
     return static::factoryCreate(
-      $item,
       $as,
       $isContainer,
       new Modifier\ModifierBag(GridItemModifierInterface::class),
@@ -53,10 +49,17 @@ class GridItem implements Utility\CommonObjectInterface {
     );
   }
 
+  public function getType(): string {
+    return 'mixed';
+  }
+
   protected function build(Slots\Build $build): Slots\Build {
+    $content = $this->map(static function (mixed $item): mixed {
+      return \is_callable($item) ? ($item)() : $item;
+    })->toArray();
+
     return $build
-      // Remove HTML hard case.
-      ->set('item', [$this->item instanceof Atom\Html\Html ? $this->item->markup : $this->item])
+      ->set('content', $content)
       ->set('isContainer', $this->isContainer)
       ->set('as', $this->as)
       ->set('modifiers', NULL);
