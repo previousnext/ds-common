@@ -49,7 +49,9 @@ class HeroBanner implements Utility\CommonObjectInterface {
     ?Component\Media\Image\Image $image = NULL,
     ?Component\LinkList\LinkList $links = NULL,
   ): static {
-    if ($image !== NULL && $links !== NULL) {
+    // Auto-builders might provide an object with no links, this is fine.
+    // @todo move to external validation.
+    if ($image !== NULL && $links !== NULL && $links->count() > 0) {
       throw new \LogicException(\sprintf('A `%s` object cannot have both $image and $links populated.', static::class));
     }
 
