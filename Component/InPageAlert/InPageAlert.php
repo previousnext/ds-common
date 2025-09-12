@@ -47,7 +47,7 @@ class InPageAlert implements Utility\CommonObjectInterface {
     return $build
       ->set('heading', $this->heading)
       ->set('type', $this->type->name)
-      ->set('content', $this->content->markup)
+      ->set('content', $this->content)
       ->set('link', $this->link);
   }
 

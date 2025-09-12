@@ -56,7 +56,7 @@ class Masthead implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('content', $this->content?->markup)
+      ->set('content', $this->content)
       ->set('containerAttributes', $this->containerAttributes)
       ->set('links', $this->links->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray())
       ->set('skipLinks', $this->skipLinks->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray());

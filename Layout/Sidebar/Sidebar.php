@@ -52,8 +52,8 @@ class Sidebar implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('content', $this->content->markup)
-      ->set('sidebar', $this->sidebar->markup)
+      ->set('content', $this->content)
+      ->set('sidebar', $this->sidebar)
       ->set('sidebarPosition', $this->position === Position::Start);
   }
 

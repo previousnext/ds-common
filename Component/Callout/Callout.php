@@ -36,7 +36,7 @@ class Callout implements Utility\CommonObjectInterface {
   protected function build(Slots\Build $build): Slots\Build {
     return $build
       ->set('heading', $this->heading)
-      ->set('content', $this->content->markup);
+      ->set('content', $this->content);
   }
 
 }

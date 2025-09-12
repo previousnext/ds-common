@@ -63,7 +63,7 @@ class ListItem implements Utility\CommonObjectInterface {
   protected function build(Slots\Build $build): Slots\Build {
     return $build
       ->set('link', $this->link)
-      ->set('content', $this->content?->markup);
+      ->set('content', $this->content);
   }
 
   public function __clone() {
