@@ -16,10 +16,11 @@ final class SidebarScenarios {
     foreach (Position::cases() as $position) {
       /** @var Sidebar $instance */
       $instance = Sidebar::create(
-        content: Atom\Html\Html::create(Markup::create('<i>Content</i>')),
-        sidebar: Atom\Html\Html::create(Markup::create('<i>Sidebar</i>')),
         position: $position,
       );
+      $instance[] = Atom\Html\Html::create(Markup::create('<i>Content</i>'));
+      $instance->sidebar[] = Atom\Html\Html::create(Markup::create('<i>Sidebar</i>'));
+
       $instance->containerAttributes['hello'] = 'world';
       $instance->containerAttributes['class'][] = 'foo';
       $instance->sidebarAttributes['hello'] = 'sidebar-world';
