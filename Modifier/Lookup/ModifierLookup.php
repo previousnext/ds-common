@@ -29,16 +29,8 @@ final class ModifierLookup {
    * @phpstan-return string[]
    */
   public function modifiersFor(string $objectClass) {
-    // Fix in pinto lib: add reverse method.
-    // We actually want the reverse of getCanonicalObjectClassName(), add this hack as a interim solution:
-    $r = new \ReflectionClass($this->pintoMapping::class);
-    $property = $r->getProperty('lsbFactoryCanonicalObjectClasses');
-    $property->setAccessible(TRUE);
-    /** @var array<class-string, class-string> $lsbFactoryCanonicalObjectClasses */
-    $lsbFactoryCanonicalObjectClasses = $property->getValue($this->pintoMapping);
-
-    $rootObj = \array_search($objectClass, $lsbFactoryCanonicalObjectClasses, TRUE);
-    if ($rootObj === FALSE) {
+    $rootObj = $this->pintoMapping->getFactoryOfCanonicalObject($objectClass);
+    if (NULL === $rootObj) {
       return [];
     }
 
