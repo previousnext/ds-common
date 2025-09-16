@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\Card;
 
-use Drupal\block_content\BlockContentInterface;
 use Drupal\Core\Template\Attribute;
-use Drupal\pinto_block\BlockBundleInterface;
-use Drupal\pinto_block\ObjectContextInterface;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
-use PreviousNext\Ds\Common\BundleClass;
 use PreviousNext\Ds\Common\Component as CommonComponents;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
@@ -33,7 +29,7 @@ use PreviousNext\IdsTools\Scenario\Scenarios;
   'containerAttributes',
 ])]
 #[Scenarios([CardScenarios::class])]
-class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
+class Card implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
@@ -100,11 +96,6 @@ class Card implements Utility\CommonObjectInterface, BlockBundleInterface {
   protected function build(Slots\Build $build): Slots\Build {
     return $build
       ->set('containerAttributes', $this->containerAttributes);
-  }
-
-  public static function createForLayoutBuilderBlockContent(BlockContentInterface $blockContent, ObjectContextInterface $objectContext): static {
-    \assert($blockContent instanceof BundleClass\BlockContent\Card\CardBundle);
-    return static::createFrom($blockContent);
   }
 
 }
