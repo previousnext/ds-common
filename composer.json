@@ -11,7 +11,14 @@
     },
     "autoload": {
         "psr-4": {
-            "PreviousNext\\Ds\\Common\\": "."
+            "PreviousNext\\Ds\\Common\\Atom\\": "Atom/",
+            "PreviousNext\\Ds\\Common\\Component\\": "Component/",
+            "PreviousNext\\Ds\\Common\\Layout\\": "Layout/",
+            "PreviousNext\\Ds\\Common\\List\\": "List/",
+            "PreviousNext\\Ds\\Common\\Modifier\\": "Modifier/",
+            "PreviousNext\\Ds\\Common\\Tests\\": "Tests/",
+            "PreviousNext\\Ds\\Common\\Utility\\": "Utility/",
+            "PreviousNext\\Ds\\Common\\Vo\\": "Vo/"
         }
     },
     "license": "proprietary"

@@ -26,7 +26,7 @@ class GridItem extends AbstractCollection implements Utility\CommonObjectInterfa
   use Utility\ObjectTrait;
 
   /**
-   * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<\PreviousNext\Ds\Common\Layout\Grid\GridModifierInterface> $modifiers
+   * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<GridItemModifierInterface> $modifiers
    */
   final private function __construct(
     protected GridItemType $as,

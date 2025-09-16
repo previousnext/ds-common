@@ -58,9 +58,6 @@ final class ModifierBag extends Set {
     });
   }
 
-  /**
-   * @phpstan-param mixed $value
-   */
   public function offsetSet(mixed $offset, mixed $value): void {
     if ($value instanceof \UnitEnum) {
       // Is the enum being added mutually exclusive (doesn't allow another enum
