@@ -37,10 +37,6 @@ class Button implements Utility\CommonObjectInterface {
     ?Atom\Icon\Icon $iconStart = NULL,
     ?Atom\Icon\Icon $iconEnd = NULL,
   ): static {
-    if ($href !== NULL && $as !== ButtonType::Link) {
-      throw new \LogicException(\sprintf('Buttons of type `%s::%s` should not have a `%s`', $as::class, $as->name, Atom\Link\Link::class));
-    }
-
     return static::factoryCreate(
       title: $title,
       href: $href,
