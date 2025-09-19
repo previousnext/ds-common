@@ -7,6 +7,7 @@ namespace PreviousNext\Ds\Common\Component\Accordion;
 use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
+use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
 use Ramsey\Collection\AbstractCollection;
@@ -56,7 +57,7 @@ class Accordion extends AbstractCollection implements Utility\CommonObjectInterf
    */
   public function addSimple(
     string $title,
-    string $content,
+    Atom\Html\Html $content,
   ) {
     $this[] = AccordionItem\AccordionItem::create($title, $content);
     return $this;

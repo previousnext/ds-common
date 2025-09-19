@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PreviousNext\Ds\Common\Component\Accordion\AccordionItem;
 
 use Pinto\Attribute\ObjectType\Slots;
+use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Utility;
 
 /**
@@ -16,7 +17,7 @@ class AccordionItem implements Utility\CommonObjectInterface {
 
   final private function __construct(
     public string $title,
-    public string $content,
+    public Atom\Html\Html $content,
     public bool $open,
     public ?string $id,
   ) {
@@ -25,7 +26,7 @@ class AccordionItem implements Utility\CommonObjectInterface {
   #[Slots(bindPromotedProperties: TRUE)]
   public static function create(
     string $title,
-    string $content,
+    Atom\Html\Html $content,
     ?bool $open = NULL,
     ?string $id = NULL,
   ): static {
