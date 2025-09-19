@@ -16,7 +16,7 @@ use Ramsey\Collection\AbstractSet;
  * @extends \Ramsey\Collection\AbstractSet<\PreviousNext\Ds\Common\Component\SocialLinks\SocialLink\SocialLink>
  */
 #[ObjectType\Slots(slots: [
-  'heading',
+  'title',
   'items',
 ])]
 #[Scenarios([SocialLinksScenarios::class])]
@@ -44,7 +44,7 @@ class SocialLinks extends AbstractSet implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('heading', $this->title)
+      ->set('title', $this->title)
       ->set('items', $this->map(static fn (SocialLink $item): mixed => $item())->toArray());
   }
 
