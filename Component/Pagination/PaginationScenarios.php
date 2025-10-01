@@ -17,7 +17,6 @@ final class PaginationScenarios {
     $previousIcon = CommonAtoms\Icon\Icon::create('arrow-left');
     $nextIcon = CommonAtoms\Icon\Icon::create('arrow-right');
 
-    /** @var Pagination $instance */
     $instance = Pagination::create(
     // @todo there should be some kind of helper to make this easier:
       previous: CommonAtoms\Link\Link::create('Previous', $url, iconStart: $previousIcon),
