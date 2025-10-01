@@ -39,7 +39,7 @@ class SearchForm implements CommonObjectInterface {
     string $actionUrl,
   ): static {
     return static::factoryCreate(
-      $actionUrl,
+      actionUrl: $actionUrl,
       containerAttributes: new Attribute(),
     );
   }
