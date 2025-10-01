@@ -9,6 +9,7 @@ enum ButtonType {
   case Input;
   case Button;
   case Link;
+  case Reset;
   case Submit;
 
 }

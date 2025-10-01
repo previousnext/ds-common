@@ -12,10 +12,9 @@ final class ButtonScenarios {
     $url = \Mockery::mock(Url::class);
     $url->expects('toString')->andReturn('http://example.com/');
 
-    /** @var Button $instance */
-    foreach ([ButtonType::Link, ButtonType::Button] as $type) {
+    foreach (ButtonType::cases() as $type) {
       yield $type->name => Button::create(
-        title: 'Link button',
+        title: \sprintf('%s button', $type->name),
         as: $type,
         href: $type === ButtonType::Link ? $url->toString() : NULL,
       );
@@ -24,12 +23,14 @@ final class ButtonScenarios {
 
   final public static function buttonStyle(): \Generator {
     foreach (ButtonStyle::cases() as $buttonStyle) {
-      $button = Button::create(
-        title: 'Button',
-        as: ButtonType::Button,
-      );
-      $button->modifiers[] = $buttonStyle;
-      yield $buttonStyle->name => $button;
+      foreach (ButtonType::cases() as $type) {
+        $button = Button::create(
+          title: \sprintf('%s in style %s', $type->name, $buttonStyle->name),
+          as: $type,
+        );
+        $button->modifiers[] = $buttonStyle;
+        yield \sprintf('%s--%s', $buttonStyle->name, $type->name) => $button;
+      }
     }
   }
 
