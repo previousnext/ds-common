@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Component\LinkList;
 
+use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
@@ -17,6 +18,7 @@ use Ramsey\Collection\AbstractCollection;
 #[ObjectType\Slots(slots: [
   'items',
   new Slots\Slot('modifier', defaultValue: NULL),
+  new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
 #[Scenarios([LinkListScenarios::class])]
 class LinkList extends AbstractCollection implements Utility\CommonObjectInterface {
@@ -26,6 +28,7 @@ class LinkList extends AbstractCollection implements Utility\CommonObjectInterfa
   // @phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod.Found
   final private function __construct(
     array $links,
+    public Attribute $containerAttributes,
   ) {
     parent::__construct($links);
   }
@@ -40,7 +43,10 @@ class LinkList extends AbstractCollection implements Utility\CommonObjectInterfa
   public static function create(
     array $links = [],
   ): static {
-    return static::factoryCreate($links);
+    return static::factoryCreate(
+      links: $links,
+      containerAttributes: new Attribute(),
+    );
   }
 
   protected function build(Slots\Build $build): Slots\Build {
@@ -49,7 +55,7 @@ class LinkList extends AbstractCollection implements Utility\CommonObjectInterfa
   }
 
   public static function fromLinks(Atom\Link\Links $links): static {
-    return new static($links->toArray());
+    return self::create($links->toArray());
   }
 
 }
