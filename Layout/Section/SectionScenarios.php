@@ -8,6 +8,7 @@ use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Component;
+use PreviousNext\IdsTools\Scenario\Scenario;
 
 final class SectionScenarios {
 
@@ -40,6 +41,7 @@ final class SectionScenarios {
     return $instance;
   }
 
+  #[Scenario(viewPortHeight: 400, viewPortWidth: 1200)]
   final public static function sectionIsContainer(): \Generator {
     foreach ([TRUE, FALSE] as $isContainer) {
       $instance = Section::create(
