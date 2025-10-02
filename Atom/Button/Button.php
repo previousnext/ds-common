@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Atom\Button;
 
+use Drupal\Core\Template\Attribute;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
@@ -26,6 +27,7 @@ class Button implements Utility\CommonObjectInterface {
     public ?Atom\Icon\Icon $iconStart,
     public ?Atom\Icon\Icon $iconEnd,
     public Modifier\ModifierBag $modifiers,
+    public Attribute $containerAttributes,
   ) {}
 
   public static function create(
@@ -46,6 +48,7 @@ class Button implements Utility\CommonObjectInterface {
       iconStart: $iconStart,
       iconEnd: $iconEnd,
       modifiers: new Modifier\ModifierBag(ButtonModifierInterface::class),
+      containerAttributes: new Attribute(),
     );
   }
 
