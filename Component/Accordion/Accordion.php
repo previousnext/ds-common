@@ -28,7 +28,7 @@ class Accordion extends AbstractCollection implements Utility\CommonObjectInterf
   use Utility\ObjectTrait;
 
   private function __construct(
-    protected string $title,
+    protected ?Atom\Heading\Heading $title,
     public Attribute $containerAttributes,
   ) {
     parent::__construct();
@@ -39,7 +39,7 @@ class Accordion extends AbstractCollection implements Utility\CommonObjectInterf
   }
 
   public static function create(
-    string $title,
+    ?Atom\Heading\Heading $title,
   ): static {
     return static::factoryCreate(
       $title,
