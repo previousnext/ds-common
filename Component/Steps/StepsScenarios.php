@@ -117,4 +117,14 @@ final class StepsScenarios {
     }
   }
 
+  final public static function contentCollection(): Steps {
+    $instance = Steps::create();
+    $instance[] = $step = Step\Step::create(Atom\Html\Html::create(Markup::create('Item 0.')));
+    $step[] = Atom\Html\Html::create(Markup::create(<<<MARKUP
+        <p>Item 1.</p>
+        MARKUP));
+    $step[] = Atom\Button\Button::create(title: 'Item 2', as: Atom\Button\ButtonType::Link);
+    return $instance;
+  }
+
 }
