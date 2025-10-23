@@ -168,4 +168,22 @@ final class ListItemScenarios {
     return $instance;
   }
 
+  final public static function contentCollection(): ListItem {
+    $url = \Mockery::mock(Url::class);
+    $url->expects('toString')->andReturn('http://example.com/');
+
+    /** @var ListItem $instance */
+    $instance = ListItem::create(
+      link: Atom\Link\Link::create('Link 1', $url),
+      content: Atom\Html\Html::create(Markup::create(<<<MARKUP
+        <p>Item 0.</p>
+        MARKUP)),
+    );
+    $instance[] = Atom\Html\Html::create(Markup::create(<<<MARKUP
+        <p>Item 1.</p>
+        MARKUP));
+    $instance[] = Atom\Button\Button::create(title: 'Item 2', as: Atom\Button\ButtonType::Link);
+    return $instance;
+  }
+
 }
