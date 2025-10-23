@@ -21,4 +21,18 @@ final class CalloutScenarios {
     return $instance;
   }
 
+  final public static function contentCollection(): Callout {
+    $instance = Callout::create(
+      heading: CommonAtoms\Heading\Heading::create('Heading!', \PreviousNext\Ds\Common\Atom\Heading\HeadingLevel::Two),
+      content: CommonAtoms\Html\Html::create(Markup::create(<<<MARKUP
+        <p>Item 0.</p>
+        MARKUP)),
+    );
+    $instance[] = CommonAtoms\Html\Html::create(Markup::create(<<<MARKUP
+        <p>Item 1.</p>
+        MARKUP));
+    $instance[] = CommonAtoms\Button\Button::create(title: 'Item 2', as: CommonAtoms\Button\ButtonType::Link);
+    return $instance;
+  }
+
 }

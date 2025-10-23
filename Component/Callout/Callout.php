@@ -7,24 +7,38 @@ namespace PreviousNext\Ds\Common\Component\Callout;
 use Drupal\Core\Template\Attribute;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
+use PreviousNext\Ds\Common\Atom\Html\Html;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
+use Ramsey\Collection\AbstractCollection;
 
+/**
+ * @extends AbstractCollection<mixed>
+ */
 #[Scenarios([CalloutScenarios::class])]
-class Callout implements Utility\CommonObjectInterface {
+class Callout extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
+  /**
+   * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
+   */
   final private function __construct(
     public Atom\Heading\Heading $heading,
-    public Atom\Html\Html $content,
+    Atom\Html\Html|iterable|null $content,
     public Attribute $containerAttributes,
   ) {
+    if ($content !== NULL) {
+      parent::__construct(\iterator_to_array($content));
+    }
   }
 
+  /**
+   * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
+   */
   public static function create(
     Atom\Heading\Heading $heading,
-    Atom\Html\Html $content,
+    Atom\Html\Html|iterable|null $content = NULL,
   ): static {
     return static::factoryCreate(
       $heading,
@@ -33,10 +47,14 @@ class Callout implements Utility\CommonObjectInterface {
     );
   }
 
+  public function getType(): string {
+    return 'mixed';
+  }
+
   protected function build(Slots\Build $build): Slots\Build {
     return $build
       ->set('heading', $this->heading)
-      ->set('content', $this->content);
+      ->set('content', Html::createFromCollection($this));
   }
 
 }
