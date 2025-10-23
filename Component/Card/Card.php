@@ -12,9 +12,11 @@ use PreviousNext\Ds\Common\Component as CommonComponents;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
+use Ramsey\Collection\AbstractCollection;
 
 /**
  * @method array{'#image': array{'#height': int}} __invoke()
+ * @extends AbstractCollection<mixed>
  */
 #[ObjectType\Slots(slots: [
   'image',
@@ -29,11 +31,12 @@ use PreviousNext\IdsTools\Scenario\Scenarios;
   'containerAttributes',
 ])]
 #[Scenarios([CardScenarios::class])]
-class Card implements Utility\CommonObjectInterface {
+class Card extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
   /**
+   * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
    * @phpstan-param Modifier\ModifierBag<\PreviousNext\Ds\Common\Component\Card\CardModifierInterface> $modifiers
    */
   final private function __construct(
@@ -43,12 +46,19 @@ class Card implements Utility\CommonObjectInterface {
     public CommonComponents\LinkList\LinkList $links,
     public CommonComponents\Tags\Tags $tags,
     public ?Atom\Heading\Heading $heading,
-    public ?Atom\Html\Html $content,
+    Atom\Html\Html|iterable|null $content,
     public ?Atom\Link\Link $link,
     public Modifier\ModifierBag $modifiers,
     public Attribute $containerAttributes,
-  ) {}
+  ) {
+    if ($content !== NULL) {
+      parent::__construct(\iterator_to_array($content));
+    }
+  }
 
+  /**
+   * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
+   */
   public static function create(
     ?CommonComponents\Media\Image\Image $image,
     ?CommonComponents\LinkList\LinkList $links,
@@ -56,7 +66,7 @@ class Card implements Utility\CommonObjectInterface {
     ?Atom\Icon\Icon $icon = NULL,
     ?CommonComponents\Tags\Tags $tags = NULL,
     ?Atom\Heading\Heading $heading = NULL,
-    ?Atom\Html\Html $content = NULL,
+    Atom\Html\Html|iterable|null $content = NULL,
     ?Atom\Link\Link $link = NULL,
   ): static {
     return static::factoryCreate(
@@ -71,6 +81,10 @@ class Card implements Utility\CommonObjectInterface {
       modifiers: new Modifier\ModifierBag(CardModifierInterface::class),
       containerAttributes: new Attribute(),
     );
+  }
+
+  public function getType(): string {
+    return 'mixed';
   }
 
   public static function createFrom(CardDataInterface $data): static {

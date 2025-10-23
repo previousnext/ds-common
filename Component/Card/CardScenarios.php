@@ -27,6 +27,22 @@ final class CardScenarios {
     return $instance;
   }
 
+  final public static function contentCollection(): Card {
+    $instance = Card::create(
+      image: NULL,
+      links: NULL,
+      heading: Atom\Heading\Heading::create('Example!', Atom\Heading\HeadingLevel::Two),
+      content: Atom\Html\Html::create(Markup::create(<<<MARKUP
+        <p>Item 0.</p>
+        MARKUP)),
+    );
+    $instance[] = Atom\Html\Html::create(Markup::create(<<<MARKUP
+        <p>Item 1.</p>
+        MARKUP));
+    $instance[] = Atom\Button\Button::create(title: 'Item 2', as: Atom\Button\ButtonType::Link);
+    return $instance;
+  }
+
   final public static function withTags(): Card {
     $tags = CommonComponents\Tags\Tags::create();
     $tags[] = CommonComponents\Tags\Tag::create('Tag 1');
