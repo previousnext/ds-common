@@ -8,10 +8,15 @@ use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom as CommonAtoms;
+use PreviousNext\Ds\Common\Atom\Html\Html;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
+use Ramsey\Collection\AbstractCollection;
 
+/**
+ * @extends AbstractCollection<mixed>
+ */
 #[ObjectType\Slots(slots: [
   'content',
   'links',
@@ -20,28 +25,33 @@ use PreviousNext\IdsTools\Scenario\Scenarios;
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
 ])]
 #[Scenarios([MastheadScenarios::class])]
-class Masthead implements Utility\CommonObjectInterface {
+class Masthead extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
   /**
+   * @phpstan-param CommonAtoms\Html\Html|iterable<mixed>|null $content
    * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<MastheadModifierInterface> $modifiers
    */
   private function __construct(
-    protected ?CommonAtoms\Html\Html $content,
+    CommonAtoms\Html\Html|iterable|null $content,
     public CommonAtoms\Link\Links $links,
     public Attribute $containerAttributes,
     public Modifier\ModifierBag $modifiers,
     public CommonAtoms\Link\Links $skipLinks,
   ) {
+    if ($content !== NULL) {
+      parent::__construct(\iterator_to_array($content));
+    }
   }
 
   /**
+   * @phpstan-param CommonAtoms\Html\Html|iterable<mixed>|null $content
    * @phpstan-param iterable<\PreviousNext\Ds\Common\Atom\Link\Link> $links
    * @phpstan-param iterable<\PreviousNext\Ds\Common\Atom\Link\Link> $skipLinks
    */
   public static function create(
-    ?CommonAtoms\Html\Html $content = NULL,
+    CommonAtoms\Html\Html|iterable|null $content = NULL,
     iterable $links = [],
     iterable $skipLinks = [],
   ): static {
@@ -54,9 +64,13 @@ class Masthead implements Utility\CommonObjectInterface {
     );
   }
 
+  public function getType(): string {
+    return 'mixed';
+  }
+
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('content', $this->content)
+      ->set('content', Html::createFromCollection($this))
       ->set('containerAttributes', $this->containerAttributes)
       ->set('links', $this->links->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray())
       ->set('skipLinks', $this->skipLinks->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray());
