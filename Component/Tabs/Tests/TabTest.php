@@ -21,9 +21,9 @@ class TabTest extends TestCase {
 
   public function testTabs(): void {
     $tabs = Tabs::create('', id: '');
-    $tabs[] = CommonComponents\Tabs\Tab::create('', '');
-    $tabs[] = $tab2 = CommonComponents\Tabs\Tab::create('', '');
-    $tabs[] = CommonComponents\Tabs\Tab::create('', '');
+    $tabs[] = CommonComponents\Tabs\Tab::create(title: '');
+    $tabs[] = $tab2 = CommonComponents\Tabs\Tab::create(title: '');
+    $tabs[] = CommonComponents\Tabs\Tab::create(title: '');
     $tabs->setActive($tab2);
 
     $rendered = $tabs();
@@ -34,7 +34,7 @@ class TabTest extends TestCase {
 
   public function testTabsDoesntExist(): void {
     $tabs = Tabs::create('', id: '');
-    $tab = CommonComponents\Tabs\Tab::create('', '');
+    $tab = CommonComponents\Tabs\Tab::create('');
 
     static::expectException(\InvalidArgumentException::class);
     static::expectExceptionMessage('Cant set active tab when it does not exist in this tab collection.');
@@ -46,7 +46,7 @@ class TabTest extends TestCase {
    */
   public function testTabsDoesntExistAnymore(): void {
     $tabs = Tabs::create('', id: '');
-    $tabs[] = $tab = CommonComponents\Tabs\Tab::create('', '');
+    $tabs[] = $tab = CommonComponents\Tabs\Tab::create('');
     $tabs->setActive($tab);
     $tabs->remove($tab);
     static::expectException(\InvalidArgumentException::class);

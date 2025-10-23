@@ -56,7 +56,7 @@ class Tabs extends AbstractSet implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     // If nothing was delegated as active by now, set first to active.
-    if ($this->active === NULL) {
+    if ($this->active === NULL && $this->count() !== 0) {
       $this->active = $this->first();
     }
 
@@ -64,7 +64,7 @@ class Tabs extends AbstractSet implements Utility\CommonObjectInterface {
     $tabs = $this->map(function (Tab $item): array {
       return [
         (TabListItem::create((string) $item->id, $item->title, $this->active === $item))(),
-        (TabItem::create((string) $item->id, $item->title, $item->content))(),
+        (TabItem::create((string) $item->id, $item->title, $item))(),
       ];
     })->toArray();
 
@@ -85,10 +85,11 @@ class Tabs extends AbstractSet implements Utility\CommonObjectInterface {
 
   /**
    * @phpstan-return $this
+   * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
    */
   public function addSimple(
     string $title,
-    string $content,
+    Atom\Html\Html|iterable|null $content = NULL,
   ) {
     $this[] = Tab::create($title, $content);
     return $this;
