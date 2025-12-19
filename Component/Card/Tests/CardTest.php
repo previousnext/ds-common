@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use PreviousNext\Ds\Common\Component as CommonComponents;
 use PreviousNext\Ds\Common\Component\Card\Card;
 use PreviousNext\IdsTools\DependencyInjection\IdsContainer;
+use PreviousNext\IdsTools\Rendering\ComponentRender;
 
 #[CoversClass(Card::class)]
 class CardTest extends TestCase {
@@ -30,7 +31,8 @@ class CardTest extends TestCase {
     $image->imageAttributes['test'] = 'image-attr';
     $image->containerAttributes['test'] = 'container-attr';
 
-    $rendered = $card();
+    $rendered = ComponentRender::renderViaGlobal($card);
+    static::assertIsArray($rendered['#image']);
     static::assertEquals(400, $rendered['#image']['#height']);
     // @codingStandardsIgnoreStart
     // static::assertEquals(300, $rendered['#image']['#width']);

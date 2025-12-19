@@ -15,7 +15,6 @@ use PreviousNext\IdsTools\Scenario\Scenarios;
 use Ramsey\Collection\AbstractCollection;
 
 /**
- * @method array{'#image': array{'#height': int}} __invoke()
  * @extends AbstractCollection<mixed>
  */
 #[ObjectType\Slots(slots: [
