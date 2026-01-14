@@ -11,10 +11,15 @@ use PreviousNext\Ds\Common\Component;
 use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
+use Ramsey\Collection\AbstractCollection;
 
+/**
+ * @extends AbstractCollection<mixed>
+ */
 #[Scenarios([HeroBannerScenarios::class])]
 #[ObjectType\Slots(slots: [
   'title',
+  'content',
   'subtitle',
   'link',
   'image',
@@ -23,7 +28,7 @@ use PreviousNext\IdsTools\Scenario\Scenarios;
   'modifiers',
   'containerAttributes',
 ])]
-class HeroBanner implements Utility\CommonObjectInterface {
+class HeroBanner extends AbstractCollection implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
@@ -39,7 +44,9 @@ class HeroBanner implements Utility\CommonObjectInterface {
     public bool $highlight,
     public Modifier\ModifierBag $modifiers,
     public Attribute $containerAttributes,
-  ) {}
+  ) {
+    parent::__construct();
+  }
 
   public static function create(
     string $title,
@@ -65,6 +72,10 @@ class HeroBanner implements Utility\CommonObjectInterface {
       modifiers: new Modifier\ModifierBag(HeroBannerModifierInterface::class),
       containerAttributes: new Attribute(),
     );
+  }
+
+  public function getType(): string {
+    return 'mixed';
   }
 
 }
