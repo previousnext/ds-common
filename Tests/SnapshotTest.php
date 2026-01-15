@@ -69,7 +69,7 @@ class SnapshotTest extends TestCase {
   ): void {
     IdsContainer::testContainerForDs($ds);
 
-    static::assertInstanceOf($objectClassName, $scenarioObject, 'A scenario must return an instance of the object it is attached to.');
+    static::assertInstanceOf($objectClassName, $scenarioObject, 'A scenario must return an instance of the object it is attached to. You might want to return the result of a call to `ScenarioSubject::createFromWiderContext()` if you need more context.');
 
     $fs = new Filesystem();
     $serializer = DumpBuildObjectSnapshots::serializerSetup();
@@ -97,12 +97,12 @@ class SnapshotTest extends TestCase {
       $primaryLists = $container->getParameter(IdsCompilerPass::PRIMARY_LISTS);
 
       $pintoMapping = \Drupal::service(PintoMapping::class);
-      foreach (Scenarios::findScenarios($pintoMapping, $primaryLists) as $scenario => $scenarioObject) {
+      foreach (Scenarios::findScenarios($pintoMapping, $primaryLists) as $scenario => $scenarioSubject) {
         // Reset IDs.
         Id::resetGlobalState();
 
         // Get the current snapshot.
-        $rendered = ComponentRender::render($pintoMapping, $buildRegistry, $scenarioObject);
+        $rendered = ComponentRender::render($pintoMapping, $buildRegistry, $scenarioSubject->obj);
 
         $pintoEnum = $scenario->pintoEnum ?? throw new \LogicException();
         $definition = ((new \ReflectionEnumUnitCase($pintoEnum::class, $pintoEnum->name))->getAttributes(\Pinto\Attribute\Definition::class)[0] ?? NULL)?->newInstance() ?? throw new \LogicException('Missing ' . Definition::class);
@@ -110,7 +110,7 @@ class SnapshotTest extends TestCase {
         yield \sprintf('Scenario: %s for %s', $scenario, $definition->className) => [
           $ds,
           $scenario,
-          $scenarioObject,
+          $scenarioSubject->obj,
           $definition->className,
           $rendered,
         ];
