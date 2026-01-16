@@ -94,6 +94,9 @@ enum CommonComponents implements ObjectListInterface, DrupalLibraryInterface {
   #[Definition(Component\Tags\Tags::class)]
   case Tags;
 
+  #[Definition(Component\UtilityList\UtilityList::class)]
+  case UtilityList;
+
   public function templateDirectory(): string {
     return \sprintf('@%s/%s', Twig::NAMESPACE, $this->resolveSubDirectory());
   }
