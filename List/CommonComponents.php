@@ -73,6 +73,9 @@ enum CommonComponents implements ObjectListInterface, DrupalLibraryInterface {
   #[Definition(Component\SocialLinks\SocialLinks::class)]
   case SocialLinks;
 
+  #[Definition(Component\SocialShare\SocialShare::class)]
+  case SocialShare;
+
   #[Definition(Component\Steps\Steps::class)]
   case Steps;
 
