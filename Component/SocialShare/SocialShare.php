@@ -39,8 +39,9 @@ class SocialShare implements Utility\CommonObjectInterface, \Countable {
    */
   public function addSocialMedia(
     SocialShareSocialMediaInterface $socialMedia,
-    Url $url,
+    ?Url $url = NULL,
   ): static {
+    $url ??= ($socialMedia->defaultUrl() ?? throw new \Exception('No URL found for ' . $socialMedia::class . '::' . $socialMedia->name));
     $this->modifiers[] = new SocialMediaUrl($socialMedia, $url);
 
     return $this;
