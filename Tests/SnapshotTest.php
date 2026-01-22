@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Tests;
 
-use Drupal\pinto\Build\BuildRegistryInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Pinto\PintoMapping;
@@ -12,7 +11,6 @@ use PreviousNext\Ds\Common\Vo\Id\Id;
 use PreviousNext\IdsTools\Command\DumpBuildObjectSnapshots;
 use PreviousNext\IdsTools\DependencyInjection\IdsCompilerPass;
 use PreviousNext\IdsTools\DependencyInjection\IdsContainer;
-use PreviousNext\IdsTools\Rendering\ComponentRender;
 use PreviousNext\IdsTools\Scenario\CompiledScenario;
 use PreviousNext\IdsTools\Scenario\Scenarios;
 use Symfony\Component\Console\Command\Command;
@@ -57,16 +55,9 @@ class SnapshotTest extends TestCase {
 
   /**
    * @phpstan-param class-string $objectClassName
-   * @phpstan-param array<mixed> $rendered
    */
   #[DataProvider('scenarios')]
-  public function testSnapshots(
-    string $ds,
-    CompiledScenario $scenario,
-    object $scenarioObject,
-    string $objectClassName,
-    array $rendered,
-  ): void {
+  public function testSnapshots(string $ds, CompiledScenario $scenario, object $scenarioObject, string $objectClassName): void {
     IdsContainer::testContainerForDs($ds);
 
     static::assertInstanceOf($objectClassName, $scenarioObject, 'A scenario must return an instance of the object it is attached to. You might want to return the result of a call to `ScenarioSubject::createFromWiderContext()` if you need more context.');
@@ -76,6 +67,10 @@ class SnapshotTest extends TestCase {
 
     // Get existing snapshot from disk. Use command to regenerate!
     $raw = $fs->readFile(DumpBuildObjectSnapshots::getDiskLocationForScenario($scenario, \Drupal::getContainer()->getParameter('ids.build_objects')['directory']));
+
+    // Get the current snapshot.
+    // @todo determine dynamic invoker.
+    $rendered = $scenarioObject();
 
     // Note! Never decode objects and compare decoded vs $rendered, as we do
     // not produce a schema or shape we can reliably restore from. Only compare
@@ -91,29 +86,15 @@ class SnapshotTest extends TestCase {
 
   public static function scenarios(): \Generator {
     foreach (IdsContainer::testContainers() as $ds => $container) {
-      $buildRegistry = $container->get(BuildRegistryInterface::class);
-
       /** @var array<class-string<\Pinto\List\ObjectListInterface>> $primaryLists */
       $primaryLists = $container->getParameter(IdsCompilerPass::PRIMARY_LISTS);
 
       $pintoMapping = \Drupal::service(PintoMapping::class);
       foreach (Scenarios::findScenarios($pintoMapping, $primaryLists) as $scenario => $scenarioSubject) {
-        // Reset IDs.
-        Id::resetGlobalState();
-
-        // Get the current snapshot.
-        $rendered = ComponentRender::render($pintoMapping, $buildRegistry, $scenarioSubject->obj);
-
         $pintoEnum = $scenario->pintoEnum ?? throw new \LogicException();
         $definition = ((new \ReflectionEnumUnitCase($pintoEnum::class, $pintoEnum->name))->getAttributes(\Pinto\Attribute\Definition::class)[0] ?? NULL)?->newInstance() ?? throw new \LogicException('Missing ' . Definition::class);
         // "for OBJECT" solves when a Scenarios class is used by multiple objects.
-        yield \sprintf('Scenario: %s for %s', $scenario, $definition->className) => [
-          $ds,
-          $scenario,
-          $scenarioSubject->obj,
-          $definition->className,
-          $rendered,
-        ];
+        yield \sprintf('Scenario: %s for %s', $scenario, $definition->className) => [$ds, $scenario, $scenarioSubject->obj, $definition->className];
       }
     }
   }
