@@ -8,23 +8,28 @@ use Drupal\Core\Template\Attribute;
 use Pinto\Attribute\ObjectType;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
+use PreviousNext\Ds\Common\Modifier;
 use PreviousNext\Ds\Common\Utility;
 use PreviousNext\IdsTools\Scenario\Scenarios;
 
-#[Scenarios([HeadingScenarios::class])]
 #[ObjectType\Slots(slots: [
   'heading',
   'level',
   'attributes',
 ])]
-final class Heading implements Utility\CommonObjectInterface {
+#[Scenarios([HeadingScenarios::class])]
+class Heading implements Utility\CommonObjectInterface {
 
   use Utility\ObjectTrait;
 
+  /**
+   * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<HeadingModifierInterface> $modifiers
+   */
   private function __construct(
     public string|Atom\Html\Html $heading,
     public HeadingLevel $level,
     public Attribute $containerAttributes,
+    public Modifier\ModifierBag $modifiers,
   ) {
   }
 
@@ -36,6 +41,7 @@ final class Heading implements Utility\CommonObjectInterface {
       heading: $heading,
       level: $level,
       containerAttributes: new Attribute(),
+      modifiers: new Modifier\ModifierBag(HeadingModifierInterface::class),
     );
   }
 
@@ -44,6 +50,11 @@ final class Heading implements Utility\CommonObjectInterface {
       ->set('heading', $this->heading)
       ->set('level', $this->level->element())
       ->set('attributes', $this->containerAttributes);
+  }
+
+  public function __clone() {
+    // Deep clone inner objects. This should be duplicated to other objects...
+    $this->modifiers = clone $this->modifiers;
   }
 
 }
