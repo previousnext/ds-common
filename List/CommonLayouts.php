@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\List;
 
-use Drupal\pinto\Resource\DrupalLibraryInterface;
 use Pinto\Attribute\Definition;
 use Pinto\Attribute\ObjectType;
 use Pinto\List\ObjectListInterface;
@@ -12,7 +11,7 @@ use PreviousNext\Ds\Common\Layout;
 use PreviousNext\Ds\Common\Utility\Twig;
 
 #[ObjectType\Slots(method: 'create', bindPromotedProperties: TRUE)]
-enum CommonLayouts implements ObjectListInterface, DrupalLibraryInterface {
+enum CommonLayouts implements ObjectListInterface {
 
   use ListTrait;
 

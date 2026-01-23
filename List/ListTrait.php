@@ -9,7 +9,6 @@ use Pinto\List\ObjectListTrait;
 
 /**
  * @phpstan-require-implements \Pinto\List\ObjectListInterface
- * @phpstan-require-implements \Drupal\pinto\Resource\DrupalLibraryInterface
  */
 trait ListTrait {
 
@@ -18,8 +17,11 @@ trait ListTrait {
   public function name(): string {
     $name = $this instanceof \BackedEnum ? $this->value : $this->name;
     // Make the hook_theme() key unique between lists.
-    // Should be able to remove this now that rendering is via render elements.
     return \sprintf('%s-%s-%s', \substr(\md5(static::class), 0, 10), (new \ReflectionClass(static::class))->getShortName(), $name);
+  }
+
+  public function libraryName(): string {
+    return $this->name();
   }
 
   public function templateName(): string {
@@ -58,21 +60,6 @@ trait ListTrait {
       string: $objectClassDir,
       offset: $offset,
     );
-  }
-
-  public function libraryName(): string {
-    // Add stability to build snapshots.
-    return $this->name();
-  }
-
-  /**
-   * @phpstan-return list<string>
-   */
-  public function attachLibraries(): array {
-    // Add stability to build snapshots.
-    return [
-      \sprintf('pinto/%s', $this->libraryName()),
-    ];
   }
 
 }

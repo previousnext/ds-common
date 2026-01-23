@@ -1,12 +1,11 @@
 {
     "name": "previousnext/ds-common",
     "type": "library",
-    "version": "0.0.1",
     "require": {
         "php": ">=8.2",
         "ramsey/collection": "^2.1.1",
         "symfony/string": "^6 || ^7.2",
-        "dpi/pinto": "^0.5@beta",
+        "dpi/pinto": "^0.4.1",
         "symfony/runtime": "^6.2 || ^7"
     },
     "autoload": {
