@@ -63,4 +63,18 @@ class Accordion extends AbstractCollection implements Utility\CommonObjectInterf
     return $this;
   }
 
+  /**
+   * @phpstan-param mixed $value
+   */
+  public function offsetSet(mixed $offset, mixed $value): void {
+    if (!$value instanceof AccordionItem\AccordionItem) {
+      $value = AccordionItem\AccordionItem::create(
+        title: NULL,
+        content: [$value],
+      );
+    }
+
+    parent::offsetSet($offset, $value);
+  }
+
 }

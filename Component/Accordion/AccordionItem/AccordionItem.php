@@ -23,7 +23,7 @@ class AccordionItem extends AbstractCollection implements Utility\CommonObjectIn
    * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
    */
   final private function __construct(
-    public string $title,
+    public Atom\Html\Html|string|null $title,
     Atom\Html\Html|iterable|null $content,
     public bool $open,
     public ?string $id,
@@ -38,7 +38,7 @@ class AccordionItem extends AbstractCollection implements Utility\CommonObjectIn
    */
   #[ObjectType\Slots(bindPromotedProperties: TRUE)]
   public static function create(
-    string $title,
+    Atom\Html\Html|string|null $title,
     Atom\Html\Html|iterable|null $content = NULL,
     ?bool $open = NULL,
     ?string $id = NULL,

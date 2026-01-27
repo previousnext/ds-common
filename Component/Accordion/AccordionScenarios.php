@@ -31,4 +31,10 @@ final class AccordionScenarios {
     return $instance;
   }
 
+  final public static function emptyAccordionItemTitle(): Accordion {
+    $instance = Accordion::create(title: Atom\Heading\Heading::create('Title!', Atom\Heading\HeadingLevel::Two));
+    $instance[] = Atom\Html\Html::create(Markup::create('<p>Foo Content</p>'));
+    return $instance;
+  }
+
 }
