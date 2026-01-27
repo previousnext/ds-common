@@ -16,6 +16,7 @@ use Ramsey\Collection\AbstractCollection;
  * @extends \Ramsey\Collection\AbstractCollection<\PreviousNext\Ds\Common\Atom\Link\Link>
  */
 #[ObjectType\Slots(slots: [
+  'title',
   'items',
   new Slots\Slot('modifier', defaultValue: NULL),
   new Slots\Slot('containerAttributes', fillValueFromThemeObjectClassPropertyWhenEmpty: 'containerAttributes'),
@@ -25,10 +26,10 @@ class LinkList extends AbstractCollection implements Utility\CommonObjectInterfa
 
   use Utility\ObjectTrait;
 
-  // @phpcs:ignore Generic.CodeAnalysis.UselessOverridingMethod.Found
   final private function __construct(
     array $links,
     public Attribute $containerAttributes,
+    public ?Atom\Heading\Heading $title = NULL,
   ) {
     parent::__construct($links);
   }
@@ -42,16 +43,19 @@ class LinkList extends AbstractCollection implements Utility\CommonObjectInterfa
    */
   public static function create(
     array $links = [],
+    Atom\Heading\Heading|string|null $title = NULL,
   ): static {
     return static::factoryCreate(
       links: $links,
       containerAttributes: new Attribute(),
+      title: \is_string($title) ? Atom\Heading\Heading::create($title, Atom\Heading\HeadingLevel::Two) : $title,
     );
   }
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('items', $this->map(static fn (Atom\Link\Link $link): mixed => $link())->toArray());
+      ->set('items', $this->map(static fn (Atom\Link\Link $link): mixed => $link())->toArray())
+      ->set('title', $this->title);
   }
 
   public static function fromLinks(Atom\Link\Links $links): static {

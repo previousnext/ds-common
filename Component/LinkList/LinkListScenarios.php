@@ -13,7 +13,17 @@ final class LinkListScenarios {
     $url = \Mockery::mock(Url::class);
     $url->expects('toString')->andReturn('http://example.com/');
 
-    $instance = LinkList::create([]);
+    $instance = LinkList::create(title: 'Link List Title!');
+    $instance[] = Atom\Link\Link::create(title: 'Link!', url: $url);
+    $instance[] = Atom\Link\Link::create('Front page!', $url);
+    return $instance;
+  }
+
+  public static function linkListWithoutTitle(): LinkList {
+    $url = \Mockery::mock(Url::class);
+    $url->expects('toString')->andReturn('http://example.com/');
+
+    $instance = LinkList::create(title: NULL);
     $instance[] = Atom\Link\Link::create(title: 'Link!', url: $url);
     $instance[] = Atom\Link\Link::create('Front page!', $url);
     return $instance;

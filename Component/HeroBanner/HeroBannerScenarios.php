@@ -47,11 +47,14 @@ final class HeroBannerScenarios {
     return HeroBanner::create(
       title: 'Hero Link List Title!',
       subtitle: 'Hero Link List Subtitle!',
-      links: CommonComponents\LinkList\LinkList::create([
-        Atom\Link\Link::create(title: 'A link', url: $url),
-        Atom\Link\Link::create('Front page!', $url),
-        Atom\Link\Link::create('Hero Link List item 2!', $url),
-      ]),
+      links: CommonComponents\LinkList\LinkList::create(
+        links:[
+          Atom\Link\Link::create(title: 'First link', url: $url),
+          Atom\Link\Link::create('Second link', $url),
+          Atom\Link\Link::create('Third link', $url),
+        ],
+        title: 'Hero Link List Title!',
+      ),
     );
   }
 
