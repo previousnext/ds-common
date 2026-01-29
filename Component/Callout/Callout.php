@@ -24,7 +24,7 @@ class Callout extends AbstractCollection implements Utility\CommonObjectInterfac
    * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
    */
   final private function __construct(
-    public Atom\Heading\Heading $heading,
+    public ?Atom\Heading\Heading $heading,
     Atom\Html\Html|iterable|null $content,
     public Attribute $containerAttributes,
   ) {
@@ -37,7 +37,7 @@ class Callout extends AbstractCollection implements Utility\CommonObjectInterfac
    * @phpstan-param Atom\Html\Html|iterable<mixed>|null $content
    */
   public static function create(
-    Atom\Heading\Heading $heading,
+    ?Atom\Heading\Heading $heading,
     Atom\Html\Html|iterable|null $content = NULL,
   ): static {
     return static::factoryCreate(
