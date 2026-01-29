@@ -36,6 +36,9 @@ enum CommonComponents implements ObjectListInterface {
   #[Definition(Component\HeroBanner\HeroBanner::class)]
   case HeroBanner;
 
+  #[Definition(Component\HeroSearch\HeroSearch::class)]
+  case HeroSearch;
+
   #[Definition(Component\Media\Image\Image::class)]
   case Image;
 
