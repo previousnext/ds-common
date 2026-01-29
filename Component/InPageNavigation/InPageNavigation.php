@@ -26,17 +26,17 @@ class InPageNavigation implements Utility\CommonObjectInterface {
    * @phpstan-param \PreviousNext\Ds\Common\Modifier\ModifierBag<InPageNavigationIncludeElementsInterface> $modifiers
    */
   final private function __construct(
-    protected Atom\Heading\Heading $heading,
+    public Atom\Heading\Heading $heading,
     public Attribute $containerAttributes,
     public Modifier\ModifierBag $modifiers,
   ) {
   }
 
   public static function create(
-    Atom\Heading\Heading $heading,
+    Atom\Heading\Heading|string $heading,
   ): static {
     return static::factoryCreate(
-      $heading,
+      heading: \is_string($heading) ? Atom\Heading\Heading::create($heading, Atom\Heading\HeadingLevel::Two) : $heading,
       containerAttributes: new Attribute(),
       modifiers: new Modifier\ModifierBag(InPageNavigationIncludeElementsInterface::class),
     );
