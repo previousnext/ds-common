@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Layout\Footer;
 
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Url;
 use PreviousNext\Ds\Common\Atom as CommonAtoms;
 use PreviousNext\Ds\Common\Component as CommonComponents;
@@ -40,7 +41,7 @@ final class FooterScenarios {
         CommonComponents\Media\Image\Image::createSample(120, 49),
         CommonAtoms\Link\Link::create('LinkedImageText!', $url),
       ),
-      description: 'We acknowledge the traditional owners and custodians of country throughout Australia and acknowledges their continuing connection to land, waters and community. We pay our respects to the people, the cultures and the elders past, present and emerging.',
+      description: CommonAtoms\Html\Html::create(Markup::create('Foo <strong>Bar</strong>!')),
       copyright: '© 2025 Company Name',
       menu: $menu,
       links: $links,

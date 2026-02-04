@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Layout\Footer;
 
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Template\Attribute;
 use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
@@ -41,7 +42,7 @@ class Footer implements CommonObjectInterface {
    */
   final private function __construct(
     public readonly iterable $logos,
-    protected readonly ?string $description,
+    protected readonly ?Atom\Html\Html $description,
     protected readonly ?string $copyright,
     protected MenuTrees $menu,
     protected Atom\Link\Links $links,
@@ -56,7 +57,7 @@ class Footer implements CommonObjectInterface {
    */
   public static function create(
     LinkedImage|iterable|null $logos = NULL,
-    ?string $description = NULL,
+    Atom\Html\Html|string|null $description = NULL,
     ?string $copyright = NULL,
     ?MenuTrees $menu = NULL,
     ?SocialLinks $socialLinks = NULL,
@@ -67,7 +68,7 @@ class Footer implements CommonObjectInterface {
     $logos = new Collection(LinkedImage::class, \iterator_to_array($logos instanceof LinkedImage ? [$logos] : $logos));
     return static::factoryCreate(
       logos: $logos,
-      description: $description,
+      description: \is_string($description) ? Atom\Html\Html::create(Markup::create($description)) : $description,
       copyright: $copyright,
       links: $links ?? new Atom\Link\Links(),
       menu: $menu ?? new MenuTrees(),
