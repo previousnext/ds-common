@@ -10,7 +10,7 @@ use PreviousNext\Ds\Common\Atom;
 final class AccordionScenarios {
 
   final public static function accordion(): Accordion {
-    /** @var Accordion $instance */
+    /** @var Accordion $accordion */
     $accordion = (Accordion::create(title: Atom\Heading\Heading::create('Title!', Atom\Heading\HeadingLevel::Two))
       ->addSimple('Foo', Atom\Html\Html::create(Markup::create('<p>Foo Content</p>')))
       ->addSimple('Bar', Atom\Html\Html::create(Markup::create('<p>Bar Content</p>')))
@@ -34,6 +34,14 @@ final class AccordionScenarios {
   final public static function emptyAccordionItemTitle(): Accordion {
     $instance = Accordion::create(title: Atom\Heading\Heading::create('Title!', Atom\Heading\HeadingLevel::Two));
     $instance[] = Atom\Html\Html::create(Markup::create('<p>Foo Content</p>'));
+    return $instance;
+  }
+
+  final public static function accordionItemInitialState(): Accordion {
+    $instance = Accordion::create(title: Atom\Heading\Heading::create('Title!', Atom\Heading\HeadingLevel::Two));
+    $instance[] = AccordionItem\AccordionItem::create('Opened', Atom\Html\Html::create(Markup::create('<p>Opened content.</p>')), open: TRUE);
+    $instance[] = AccordionItem\AccordionItem::create('Closed', Atom\Html\Html::create(Markup::create('<p>Closed content.</p>')), open: FALSE);
+    $instance[] = AccordionItem\AccordionItem::create('Default', Atom\Html\Html::create(Markup::create('<p>Default content.</p>')), open: NULL);
     return $instance;
   }
 
