@@ -113,7 +113,7 @@ final class StepsScenarios {
         }
       }
 
-      yield $name => $instance->resetRange()->setActiveRange(...$range);
+      yield \str_replace(['(', ')'], '', $name) => $instance->resetRange()->setActiveRange(...$range);
     }
   }
 
