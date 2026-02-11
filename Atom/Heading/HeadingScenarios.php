@@ -42,4 +42,16 @@ final class HeadingScenarios {
     }
   }
 
+  /**
+   * No visual differences expected, only snapshot (markup).
+   */
+  final public static function headingIsExcluded(): Heading {
+    $heading = Heading::create(
+      heading: 'Heading!',
+      level: HeadingLevel::Two,
+    );
+    $heading->isExcluded = TRUE;
+    return $heading;
+  }
+
 }

@@ -30,6 +30,10 @@ class Heading implements Utility\CommonObjectInterface {
     public HeadingLevel $level,
     public Attribute $containerAttributes,
     public Modifier\ModifierBag $modifiers,
+    // Mark the heading as 'excluded' to remove it from certain JS contexts.
+    public bool $isExcluded = FALSE,
+    // Mark the heading as visually hidden so that it's only available for screen reader context.
+    public bool $isVisuallyHidden = FALSE,
   ) {
   }
 
