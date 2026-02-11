@@ -200,4 +200,18 @@ class Steps extends AbstractSet implements Utility\CommonObjectInterface {
     return $this;
   }
 
+  /**
+   * @phpstan-param mixed $value
+   */
+  public function offsetSet(mixed $offset, mixed $value): void {
+    if (!$value instanceof Step\Step) {
+      $step = Step\Step::create();
+      $step[] = $value;
+      parent::offsetSet($offset, $step);
+      return;
+    }
+
+    parent::offsetSet($offset, $value);
+  }
+
 }
