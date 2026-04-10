@@ -18,15 +18,15 @@ class SidebarTest extends TestCase {
 
   public function testSidebarDisconnectionOnClone(): void {
     $sidebarLayout = CommonLayouts\Sidebar\Sidebar::create(CommonLayouts\Sidebar\Position::Start);
-    $sidebarLayout->containerAttributes['class'][] = 'ct';
-    $sidebarLayout->contentAttributes['class'][] = 'con';
+    $sidebarLayout->containerAttributes->addClass('ct');
+    $sidebarLayout->contentAttributes->addClass('con');
     $sidebarLayout[] = 'Content';
     $sidebarLayout->sidebar[] = 'Sidebar';
     static::assertCount(1, $sidebarLayout);
     static::assertCount(1, $sidebarLayout->sidebar);
 
-    $sidebarLayout->sidebarAttributes['class'][] = 'class1';
-    $sidebarLayout->sidebar->sidebarAttributes['class'][] = 'class2';
+    $sidebarLayout->sidebarAttributes->addClass('class1');
+    $sidebarLayout->sidebar->sidebarAttributes->addClass('class2');
     static::assertEquals('class1 class2', (string) $sidebarLayout->sidebarAttributes->getClass());
     static::assertEquals('class1 class2', (string) $sidebarLayout->sidebar->sidebarAttributes->getClass());
     static::assertCount(2, $sidebarLayout->sidebarAttributes['class']);
@@ -42,10 +42,10 @@ class SidebarTest extends TestCase {
     static::assertCount(2, $cloned);
     static::assertCount(2, $cloned->sidebar);
 
-    $cloned->containerAttributes['class'][] = 'ct';
-    $cloned->contentAttributes['class'][] = 'con';
-    $cloned->sidebarAttributes['class'][] = 'class1';
-    $cloned->sidebar->sidebarAttributes['class'][] = 'class2';
+    $cloned->containerAttributes->addClass('ct');
+    $cloned->contentAttributes->addClass('con');
+    $cloned->sidebarAttributes->addClass('class1');
+    $cloned->sidebar->sidebarAttributes->addClass('class2');
     // Original is untouched:
     static::assertCount(2, $sidebarLayout->sidebarAttributes['class']);
     static::assertCount(2, $sidebarLayout->sidebar->sidebarAttributes['class']);

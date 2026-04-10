@@ -21,12 +21,12 @@ final class SidebarScenarios {
       $instance[] = Atom\Html\Html::create(Markup::create('<i>Content</i>'));
       $instance->sidebar[] = Atom\Html\Html::create(Markup::create('<i>Sidebar</i>'));
 
-      $instance->containerAttributes['hello'] = 'world';
-      $instance->containerAttributes['class'][] = 'foo';
-      $instance->sidebarAttributes['hello'] = 'sidebar-world';
-      $instance->sidebarAttributes['class'][] = 'sidebar-foo';
-      $instance->contentAttributes['hello'] = 'content-world';
-      $instance->contentAttributes['class'][] = 'content-foo';
+      $instance->containerAttributes->setAttribute('hello', 'world');
+      $instance->containerAttributes->addClass('foo');
+      $instance->sidebarAttributes->setAttribute('hello', 'sidebar-world');
+      $instance->sidebarAttributes->addClass('sidebar-foo');
+      $instance->contentAttributes->setAttribute('hello', 'content-world');
+      $instance->contentAttributes->addClass('content-foo');
       yield \sprintf('sidebar-%s', $position->name) => $instance;
     }
   }

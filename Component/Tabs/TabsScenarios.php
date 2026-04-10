@@ -17,7 +17,7 @@ final class TabsScenarios {
     $instance[] = Tab::create('Tab 3', ['Tab 3 contents!']);
     $instance->addSimple('Tab 4', ['Tab 4 contents!']);
     $instance->setActive($tab2);
-    $instance->containerAttributes['foo'] = 'bar';
+    $instance->containerAttributes->setAttribute('foo', 'bar');
     return $instance;
   }
 

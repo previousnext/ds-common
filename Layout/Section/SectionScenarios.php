@@ -25,9 +25,9 @@ final class SectionScenarios {
     );
     $instance[] = Atom\Html\Html::create(Markup::create('<div>Section <strong>contents</strong> 1</div>'));
     $instance[] = Atom\Html\Html::create(Markup::create('<div>Section <strong>contents</strong> 2</div>'));
-    $instance->containerAttributes['foo'] = 'bar';
-    $instance->containerAttributes['class'][] = 'hello';
-    $instance->containerAttributes['class'][] = 'world';
+    $instance->containerAttributes->setAttribute('foo', 'bar');
+    $instance->containerAttributes->addClass('hello');
+    $instance->containerAttributes->addClass('world');
     return $instance;
   }
 

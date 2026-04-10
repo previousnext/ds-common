@@ -27,8 +27,8 @@ class CardTest extends TestCase {
       date: new \DateTimeImmutable('1st January 2001'),
     );
 
-    $image->imageAttributes['test'] = 'image-attr';
-    $image->containerAttributes['test'] = 'container-attr';
+    $image->imageAttributes->setAttribute('test', 'image-attr');
+    $image->containerAttributes->setAttribute('test', 'container-attr');
 
     $rendered = $card();
     static::assertEquals(400, $rendered['#image']['#height']);

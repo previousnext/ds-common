@@ -16,8 +16,8 @@ final class AccordionScenarios {
       ->addSimple('Bar', Atom\Html\Html::create(Markup::create('<p>Bar Content</p>')))
       ->addSimple('Baz', Atom\Html\Html::create(Markup::create('<p>Baz Content</p>')))
     );
-    $accordion->containerAttributes['hello'] = 'world';
-    $accordion->containerAttributes['class'][] = 'foo';
+    $accordion->containerAttributes->setAttribute('hello', 'world');
+    $accordion->containerAttributes->addClass('foo');
     return $accordion;
   }
 

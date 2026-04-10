@@ -20,7 +20,7 @@ final class StepsScenarios {
     $instance[] = Step\Step::create(Atom\Html\Html::create(Markup::create('Step 3 contents')));
     $instance->addSimple(Markup::create('Step 4 contents'));
     $instance->addSimple(Markup::create('Step 5 contents'));
-    $instance->containerAttributes['foo'] = 'bar';
+    $instance->containerAttributes->setAttribute('foo', 'bar');
     $instance->setActiveRange($instance[0], $instance[1]);
     if ($instance instanceof \PreviousNext\Ds\Mixtape\Component\Steps\Steps) {
       $instance->modifiers[] = StepsBackground::Dark;

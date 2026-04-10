@@ -22,8 +22,8 @@ final class PaginationScenarios {
       previous: CommonAtoms\Link\Link::create('Previous', $url, iconStart: $previousIcon),
       next: CommonAtoms\Link\Link::create('Next', $url, iconEnd: $nextIcon),
     );
-    $instance->containerAttributes['hello'] = 'world';
-    $instance->containerAttributes['class'][] = 'foo';
+    $instance->containerAttributes->setAttribute('hello', 'world');
+    $instance->containerAttributes->addClass('foo');
 
     // @todo there should be some kind of helper to make this easier:
     $instance[] = CommonComponent\Pagination\PaginationItem\PaginationItem::create(link: CommonAtoms\Link\Link::create('1', $url));

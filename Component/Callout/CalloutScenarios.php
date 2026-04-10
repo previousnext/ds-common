@@ -15,9 +15,9 @@ final class CalloutScenarios {
       CommonAtoms\Heading\Heading::create('Heading!', \PreviousNext\Ds\Common\Atom\Heading\HeadingLevel::Two),
       CommonAtoms\Html\Html::create(Markup::create('<div>Foo <strong>bar</strong></div>')),
     );
-    $instance->containerAttributes['foo'] = 'bar';
-    $instance->containerAttributes['class'][] = 'hello';
-    $instance->containerAttributes['class'][] = 'world';
+    $instance->containerAttributes->setAttribute('foo', 'bar');
+    $instance->containerAttributes->addClass('hello');
+    $instance->containerAttributes->addClass('world');
     return $instance;
   }
 

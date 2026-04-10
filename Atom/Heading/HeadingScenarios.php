@@ -14,8 +14,8 @@ final class HeadingScenarios {
       heading: 'Heading text',
       level: HeadingLevel::Two,
     );
-    $heading->containerAttributes['id'] = 'my-heading';
-    $heading->containerAttributes['class'][] = 'a-class';
+    $heading->containerAttributes->setAttribute('id', 'my-heading');
+    $heading->containerAttributes->addClass('a-class');
     return $heading;
   }
 

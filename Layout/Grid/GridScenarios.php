@@ -17,9 +17,9 @@ final class GridScenarios {
       as: GridItem\GridItemType::Div,
     );
     $gridItem[] = Atom\Html\Html::create(Markup::create('<i>Grid item contents 2</i>'));
-    $gridItem->containerAttributes['foo'] = 'gibar';
-    $gridItem->containerAttributes['class'][] = 'gi hello';
-    $gridItem->containerAttributes['class'][] = 'gi world';
+    $gridItem->containerAttributes->setAttribute('foo', 'gibar');
+    $gridItem->containerAttributes->addClass('gi hello');
+    $gridItem->containerAttributes->addClass('gi world');
 
     return $instance;
   }

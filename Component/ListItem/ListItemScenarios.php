@@ -163,8 +163,8 @@ final class ListItemScenarios {
         MARKUP,
       infoPosition: InfoPosition::After,
     );
-    $instance->containerAttributes['foo'] = 'bar';
-    $instance->containerAttributes['class'][] = 'hello';
+    $instance->containerAttributes->setAttribute('foo', 'bar');
+    $instance->containerAttributes->addClass('hello');
     return $instance;
   }
 

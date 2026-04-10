@@ -18,9 +18,9 @@ final class BreadcrumbScenarios {
     $instance[] = Link::create('Link 1', $url);
     $instance[] = Link::create('Link 2', $url);
     $instance[] = Link::create('Link 3', $url);
-    $instance->containerAttributes['hello'] = 'world';
-    $instance->containerAttributes['class'][] = 'foo';
-    $instance->containerAttributes['name'] = 'world';
+    $instance->containerAttributes->setAttribute('hello', 'world');
+    $instance->containerAttributes->addClass('foo');
+    $instance->containerAttributes->setAttribute('name', 'world');
     return $instance;
   }
 

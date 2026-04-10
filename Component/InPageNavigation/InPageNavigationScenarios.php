@@ -22,8 +22,8 @@ final class InPageNavigationScenarios {
     $instance = InPageNavigation::create(
       heading: Atom\Heading\Heading::create('Example!', Atom\Heading\HeadingLevel::Two),
     );
-    $instance->containerAttributes['hello'] = 'world';
-    $instance->containerAttributes['class'][] = 'foo';
+    $instance->containerAttributes->setAttribute('hello', 'world');
+    $instance->containerAttributes->addClass('foo');
     $instance->modifiers[] = IncludeHeadingLevels::H1;
     $instance->modifiers[] = IncludeHeadingLevels::H2;
     $instance->modifiers[] = IncludeHeadingLevels::H3;
@@ -34,7 +34,7 @@ final class InPageNavigationScenarios {
       as: SectionType::Div,
       isContainer: FALSE,
     );
-    $content->containerAttributes['class'][] = 'js-content';
+    $content->containerAttributes->addClass('js-content');
 
     $m = 0;
     for ($n = 1; $n <= 3; $n++) {
