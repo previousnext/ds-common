@@ -91,7 +91,7 @@ class SnapshotTest extends TestCase {
 
       $pintoMapping = \Drupal::service(PintoMapping::class);
       foreach (Scenarios::findScenarios($pintoMapping, $primaryLists) as $scenario => $scenarioSubject) {
-        $pintoEnum = $scenario->pintoEnum ?? throw new \LogicException();
+        $pintoEnum = $scenario->pintoEnum;
         $definition = ((new \ReflectionEnumUnitCase($pintoEnum::class, $pintoEnum->name))->getAttributes(\Pinto\Attribute\Definition::class)[0] ?? NULL)?->newInstance() ?? throw new \LogicException('Missing ' . Definition::class);
         // "for OBJECT" solves when a Scenarios class is used by multiple objects.
         yield \sprintf('Scenario: %s for %s', $scenario, $definition->className) => [$ds, $scenario, $scenarioSubject->obj, $definition->className];
