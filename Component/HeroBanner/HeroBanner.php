@@ -55,6 +55,7 @@ class HeroBanner extends AbstractCollection implements Utility\CommonObjectInter
     Atom\Button\Button|Atom\Link\Link|null $link = NULL,
     ?Component\Media\Image\Image $image = NULL,
     ?Component\LinkList\LinkList $links = NULL,
+    ?Atom\Button\Button $button = NULL,
   ): static {
     // Auto-builders might provide an object with no links, this is fine.
     // @todo move to external validation.
@@ -62,6 +63,7 @@ class HeroBanner extends AbstractCollection implements Utility\CommonObjectInter
       throw new \LogicException(\sprintf('A `%s` object cannot have both $image and $links populated.', static::class));
     }
 
+    $link = $link ?? $button;
     return static::factoryCreate(
       title: Atom\Heading\Heading::create($title, Atom\Heading\HeadingLevel::One),
       subtitle: $subtitle,
