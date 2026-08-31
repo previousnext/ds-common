@@ -57,6 +57,7 @@ class AccordionItem extends AbstractCollection implements Utility\CommonObjectIn
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
+      ->set('title', $this->title)
       ->set('content', Html::createFromCollection($this));
   }
 

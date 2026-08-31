@@ -69,7 +69,7 @@ class Accordion extends AbstractCollection implements Utility\CommonObjectInterf
   public function offsetSet(mixed $offset, mixed $value): void {
     if (!$value instanceof AccordionItem\AccordionItem) {
       $value = AccordionItem\AccordionItem::create(
-        title: NULL,
+        title: 'Untitled accordion item',
         content: [$value],
       );
     }
