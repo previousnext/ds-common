@@ -48,8 +48,7 @@ class Accordion extends AbstractCollection implements Utility\CommonObjectInterf
   }
 
   protected function build(Slots\Build $build): Slots\Build {
-    return $build
-      ->set('items', $this->map(static fn (AccordionItem\AccordionItem $item): mixed => $item())->toArray());
+    return $build;
   }
 
   /**

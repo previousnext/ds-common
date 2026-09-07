@@ -70,16 +70,11 @@ class Section extends AbstractCollection implements Utility\CommonObjectInterfac
   }
 
   protected function build(Slots\Build $build): Slots\Build {
-    $content = $this->map(static function (SectionItem $item): mixed {
-      return \is_callable($item->content) ? ($item->content)() : $item->content;
-    })->toArray();
-
     return $build
       ->set('background', $this->background)
       ->set('isContainer', $this->isContainer)
       ->set('as', $this->as)
       ->set('heading', $this->heading)
-      ->set('content', $content)
       ->set('link', $this->link)
       ->set('modifiers', NULL);
   }

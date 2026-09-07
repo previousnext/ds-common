@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PreviousNext\Ds\Common\Utility;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
+
 /**
  * @internal
  */
@@ -28,6 +30,15 @@ final class Twig {
       // Down.
       ...\array_slice($toParts, $commonLength),
     ]);
+  }
+
+  /**
+   * Determine if we're in a Drupal installation.
+   *
+   * Currently used to work around the inability to use `#type` in render elements.
+   */
+  public static function hasRenderPreprocessing(): bool {
+    return \Drupal::hasService(ModuleHandlerInterface::class);
   }
 
 }

@@ -44,8 +44,7 @@ class SocialLinks extends AbstractSet implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('title', $this->title)
-      ->set('items', $this->map(static fn (SocialLink $item): mixed => $item())->toArray());
+      ->set('title', $this->title);
   }
 
   /**

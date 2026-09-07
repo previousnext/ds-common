@@ -54,7 +54,6 @@ class LinkList extends AbstractCollection implements Utility\CommonObjectInterfa
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('items', $this->map(static fn (Atom\Link\Link $link): mixed => $link())->toArray())
       ->set('title', $this->title);
   }
 

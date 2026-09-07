@@ -76,8 +76,7 @@ class Pagination extends AbstractCollection implements Utility\CommonObjectInter
       }
     }
 
-    return $build
-      ->set('pages', $this->map(static fn (PaginationItem $item): mixed => $item())->toArray());
+    return $build;
   }
 
 }

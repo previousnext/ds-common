@@ -59,7 +59,6 @@ class Grid extends AbstractCollection implements Utility\CommonObjectInterface {
 
   protected function build(Slots\Build $build): Slots\Build {
     return $build
-      ->set('items', $this->map(static fn (GridItem\GridItem $item): mixed => $item())->toArray())
       ->set('modifiers', NULL)
       ->set('as', NULL);
   }

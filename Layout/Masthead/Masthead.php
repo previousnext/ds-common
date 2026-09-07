@@ -71,9 +71,7 @@ class Masthead extends AbstractCollection implements Utility\CommonObjectInterfa
   protected function build(Slots\Build $build): Slots\Build {
     return $build
       ->set('content', Html::createFromCollection($this))
-      ->set('containerAttributes', $this->containerAttributes)
-      ->set('links', $this->links->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray())
-      ->set('skipLinks', $this->skipLinks->map(static fn (CommonAtoms\Link\Link $item): mixed => $item())->toArray());
+      ->set('containerAttributes', $this->containerAttributes);
   }
 
   public function __clone() {

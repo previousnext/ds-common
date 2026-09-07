@@ -74,8 +74,7 @@ class Steps extends AbstractSet implements Utility\CommonObjectInterface {
 
     return $build
       ->set('hasBackgroundFill', $this->hasBackgroundFill)
-      ->set('hasTextCounters', $this->hasTextCounters)
-      ->set('items', $this->map(static fn (Step\Step $item): mixed => $item())->toArray());
+      ->set('hasTextCounters', $this->hasTextCounters);
   }
 
   /**

@@ -6,7 +6,6 @@ namespace PreviousNext\Ds\Common\Layout\Footer;
 
 use Drupal\Core\Render\Markup;
 use Drupal\Core\Template\Attribute;
-use Pinto\Slots;
 use PreviousNext\Ds\Common\Atom;
 use PreviousNext\Ds\Common\Atom\LinkedImage\LinkedImage;
 use PreviousNext\Ds\Common\Component\SocialLinks\SocialLinks;
@@ -76,11 +75,6 @@ class Footer implements CommonObjectInterface {
       modifiers: new Modifier\ModifierBag(FooterModifierInterface::class),
       containerAttributes: new Attribute(),
     );
-  }
-
-  protected function build(Slots\Build $build): Slots\Build {
-    return $build
-      ->set('links', $this->links->map(static fn (Atom\Link\Link $item): mixed => $item())->toArray());
   }
 
   public function __clone() {
