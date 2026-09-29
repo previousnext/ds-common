@@ -8,6 +8,7 @@ use GoodPhp\Reflection;
 use GoodPhp\Reflection\Reflector;
 use GoodPhp\Reflection\Type\Type;
 use Pinto\Attribute\Definition;
+use Pinto\PintoMapping;
 
 /**
  * Discovers which objects are collections, and which data types may be appended or produced when iterated.
@@ -24,10 +25,7 @@ final class CollectionGenerics {
    */
   private array $discovery;
 
-  /**
-   * @phpstan-param array<class-string<\Pinto\List\ObjectListInterface>> $pintoLists
-   */
-  public function __construct(private array $pintoLists) {
+  public function __construct(private PintoMapping $pintoMapping) {
     // Build once as it's expensive.
     $this::$reflector ??= (new Reflection\ReflectorBuilder())
       ->withFileCache()
@@ -42,7 +40,7 @@ final class CollectionGenerics {
   public function iterableType(string $objectClass): Type {
     $this->discovery();
 
-    return $this->discovery[$objectClass][0] ?? throw new \InvalidArgumentException();
+    return $this->discovery[$objectClass][0] ?? throw new \InvalidArgumentException(\sprintf('No iterable type discovered for %s.', $objectClass));
   }
 
   /**
@@ -52,7 +50,7 @@ final class CollectionGenerics {
   public function appendType(string $objectClass): Type {
     $this->discovery();
 
-    return $this->discovery[$objectClass][1] ?? throw new \InvalidArgumentException();
+    return $this->discovery[$objectClass][1] ?? throw new \InvalidArgumentException(\sprintf('No valid append type discovered for %s class.', $objectClass));
   }
 
   public function discovery(): void {
@@ -63,7 +61,7 @@ final class CollectionGenerics {
     /** @var array<class-string<\ArrayAccess<mixed, mixed>>> $arrayAccessClasses */
     $arrayAccessClasses = [];
 
-    foreach ($this->pintoLists as $pintoList) {
+    foreach ($this->pintoMapping->getEnumClasses() as $pintoList) {
       foreach ($pintoList::cases() as $case) {
         $rCase = new \ReflectionEnumUnitCase($case::class, $case->name);
         $definitionAttr = ($rCase->getAttributes(Definition::class)[0] ?? NULL)?->newInstance();
