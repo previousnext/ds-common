@@ -6,8 +6,10 @@ namespace PreviousNext\Ds\Common\Utility;
 
 use Drupal\Core\Cache;
 use Drupal\pinto\Object as PintoObject;
+use Drupal\pnx_ds_common\PintoCanvasRender\ElementSlots;
 use Pinto\CanonicalProduct\CanonicalFactoryTrait;
 use Pinto\Slots;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @phpstan-require-implements \PreviousNext\Ds\Common\Utility\CommonObjectInterface
@@ -47,6 +49,15 @@ trait ObjectTrait {
   /**
    * @phpstan-param array<string, mixed> $built
    */
-  protected function postModifyRenderArray(array &$built): void {}
+  protected function postModifyRenderArray(array &$built): void {
+    static::elementSlots()?->postModifyRenderArray($this, $built);
+  }
+
+  /**
+   * Returns ElementSlots service when Canvas x Pinto integration is available.
+   */
+  protected static function elementSlots(): ?ElementSlots {
+    return \Drupal::getContainer()->get(ElementSlots::class, ContainerInterface::NULL_ON_INVALID_REFERENCE);
+  }
 
 }
