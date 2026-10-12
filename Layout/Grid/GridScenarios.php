@@ -24,4 +24,22 @@ final class GridScenarios {
     return $instance;
   }
 
+  /**
+   * @phpstan-return \Generator<Grid>
+   */
+  final public static function gridItemsContained(): \Generator {
+    foreach ([TRUE, FALSE] as $isContainer) {
+      /** @var Grid $grid */
+      $grid = Grid::create(as: GridType::Div, gridItemDefaultType: GridItem\GridItemType::ListItem);
+      foreach (\range(1, 3) as $i) {
+        $grid[] = $gridItem = GridItem\GridItem::create(
+          as: GridItem\GridItemType::Div,
+          isContainer: $isContainer,
+        );
+        $gridItem[] = Atom\Html\Html::create(Markup::create(\sprintf('<i>Grid item contents %s</i>', $i)));
+      }
+      yield 'grid items are ' . (!$isContainer ? 'not' : '') . ' contained' => $grid;
+    }
+  }
+
 }
